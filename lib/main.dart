@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:space_x_tracker/views/home_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.blueAccent,
         ),
       ),
+      home: const HomeView(),
     );
   }
 }
