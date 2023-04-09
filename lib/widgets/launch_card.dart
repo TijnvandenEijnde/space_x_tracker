@@ -15,6 +15,7 @@ class LaunchCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool success = launch.success == null || launch.success == false;
     final Map<IconData, String> icons = {
       Icons.person: launch.crew?.length.toString() ?? '0',
       Icons.support: launch.cores?.length.toString() ?? '0',
@@ -34,11 +35,17 @@ class LaunchCard extends StatelessWidget {
             : launch.name!.substring(0, min(launch.name!.length, 10)),
       ),
       Text(
-        launch.success == null || launch.success == false ? 'FAILED' : 'SUCCESS',
+        success
+            ? launch.upcoming == true
+                ? 'UPCOMING'
+                : 'FAILED'
+            : 'SUCCESS',
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          color: launch.success == null || launch.success == false
-              ? launch.upcoming == true ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.error
+          color: success
+              ? launch.upcoming == true
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.error
               : Theme.of(context).colorScheme.success,
         ),
       ),
@@ -48,9 +55,11 @@ class LaunchCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
         side: BorderSide(
-          color: launch.success ?? false
-              ? Theme.of(context).colorScheme.success
-              : Theme.of(context).colorScheme.error,
+          color: success
+              ? launch.upcoming == true
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).colorScheme.error
+              : Theme.of(context).colorScheme.success,
           width: 1.5,
         ),
       ),
@@ -67,7 +76,7 @@ class LaunchCard extends StatelessWidget {
             ),
             SizedBox(width: MediaQuery.of(context).size.width * 0.04),
             SizedBox(
-              width: MediaQuery.of(context).size.width * 0.55,
+              width: MediaQuery.of(context).size.width * 0.60,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
