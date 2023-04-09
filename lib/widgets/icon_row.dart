@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:space_x_tracker/widgets/icon_row_item.dart';
 
 class IconRow extends StatelessWidget {
-  final Map<IconData, int> icons;
+  final Map<IconData, String> icons;
 
   const IconRow({Key? key, required this.icons}) : super(key: key);
 

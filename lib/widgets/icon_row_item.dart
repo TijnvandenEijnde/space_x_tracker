@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class IconRowItem extends StatelessWidget {
-  final int count;
+  final String count;
   final IconData icon;
 
   const IconRowItem({
@@ -18,7 +18,7 @@ class IconRowItem extends StatelessWidget {
           icon,
           size: MediaQuery.of(context).size.width * 0.05,
         ),
-        Text(count == 0 ? '0' : count.toString()),
+        Text(count),
       ],
     );
   }
