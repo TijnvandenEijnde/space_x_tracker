@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:space_x_tracker/custom_color_scheme.dart';
 import 'package:space_x_tracker/providers/models/core.dart';
 import 'package:space_x_tracker/providers/models/crew.dart';
 import 'package:space_x_tracker/providers/models/failure.dart';
@@ -105,6 +106,9 @@ class _HomeViewState extends State<HomeView> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
                 side: BorderSide(color: Theme.of(context).colorScheme.error)),
+                  color: launches[index].success
+                      ? Theme.of(context).colorScheme.success
+                      : Theme.of(context).colorScheme.error,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -114,7 +118,9 @@ class _HomeViewState extends State<HomeView> {
                   ),
                   CircleAvatar(
                     radius: 36.5,
-                    backgroundColor: Theme.of(context).colorScheme.error,
+                    backgroundColor: launches[index].success
+                        ? Theme.of(context).colorScheme.success
+                        : Theme.of(context).colorScheme.error,
                     child: CircleAvatar(
                       backgroundColor: Theme.of(context).colorScheme.onPrimary,
                       radius: 35.0,
@@ -148,7 +154,7 @@ class _HomeViewState extends State<HomeView> {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: launches[index].success
-                                      ? Colors.green
+                                      ? Theme.of(context).colorScheme.success
                                       : Theme.of(context).colorScheme.error),
                             ),
                           ],
