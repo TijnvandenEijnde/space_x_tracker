@@ -11,11 +11,12 @@ class IconRow extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.5,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: icons.entries.map((icon) {
-                return IconRowItem(count: icon.value, icon: icon.key);
+                return Padding(
+                  padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.035),
+                  child: IconRowItem(count: icon.value, icon: icon.key),
+                );
               }).toList(),
           ),
         )
