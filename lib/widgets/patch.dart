@@ -10,8 +10,11 @@ class Patch extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.175,
       height: MediaQuery.of(context).size.height * 0.09,
-      child: Image.network(
-        // @todo networkSource need nullcheck
+      child: networkSource == null
+      ? const Text('🚀', style: TextStyle(
+        fontSize: 50
+      ),)
+      : Image.network(
         networkSource!,
         scale: 4.5,
         fit: BoxFit.contain,
