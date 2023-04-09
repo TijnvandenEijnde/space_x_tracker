@@ -1,6 +1,11 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'core.g.dart';
+
+@JsonSerializable()
 class Core {
   final String? core;
-  final String? flight;
+  final int? flight;
   final bool? gridfins;
   final bool? legs;
   final bool? reused;
@@ -20,4 +25,6 @@ class Core {
     required this.landingType,
     required this.landpad,
   });
+
+  factory Core.fromJson(Map<String, dynamic> json) => _$CoreFromJson(json);
 }

@@ -1,38 +1,42 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:space_x_tracker/providers/models/core.dart';
 import 'package:space_x_tracker/providers/models/crew.dart';
 import 'package:space_x_tracker/providers/models/failure.dart';
 import 'package:space_x_tracker/providers/models/fairing.dart';
 
+part 'launch.g.dart';
+
+@JsonSerializable()
 class Launch {
-  final bool autoUpdate;
+  final bool? autoUpdate;
   final String? article;
   final List<String>? capsules;
-  final List<Core> cores;
+  final List<Core>? cores;
   final List<Crew>? crew;
-  final DateTime dateLocal;
-  final String datePrecision;
-  final DateTime dateUnix;
-  final DateTime dateUtc;
+  final DateTime? dateLocal;
+  final String? datePrecision;
+  final DateTime? dateUnix;
+  final DateTime? dateUtc;
   final String? details;
   final List<Failure>? failures;
-  final List<Fairing>? fairings;
-  final String flightNumber;
-  final String id;
-  final String launchLibraryId;
-  final String launchpad;
-  final String name;
-  final bool net;
-  final String patch;
+  final Fairing? fairings;
+  final int? flightNumber;
+  final String? id;
+  final String? launchLibraryId;
+  final String? launchpad;
+  final String? name;
+  final bool? net;
+  final String? patch;
   final List<String>? payloads;
-  final String rocket;
+  final String? rocket;
   final List<String>? ships;
   final DateTime? staticFireDateUnix;
   final DateTime? staticFireDateUtc;
-  final bool success;
-  final bool tbd;
-  final bool upcoming;
-  final String webcast;
-  final String? window;
+  final bool? success;
+  final bool? tbd;
+  final bool? upcoming;
+  final String? webcast;
+  final int? window;
 
   Launch({
     required this.autoUpdate,
@@ -65,4 +69,6 @@ class Launch {
     required this.webcast,
     required this.window,
   });
+
+  factory Launch.fromJson(Map<String, dynamic> json) => _$LaunchFromJson(json);
 }
