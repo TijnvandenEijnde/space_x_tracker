@@ -104,11 +104,14 @@ class _HomeViewState extends State<HomeView> {
           padding: const EdgeInsets.all(8.0),
           child: Card(
             shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-                side: BorderSide(color: Theme.of(context).colorScheme.error)),
-                  color: launches[index].success
-                      ? Theme.of(context).colorScheme.success
-                      : Theme.of(context).colorScheme.error,
+              borderRadius: BorderRadius.circular(20.0),
+              side: BorderSide(
+                color: launches[index].success
+                    ? Theme.of(context).colorScheme.success
+                    : Theme.of(context).colorScheme.error,
+                width: 1.5,
+              ),
+            ),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -117,13 +120,13 @@ class _HomeViewState extends State<HomeView> {
                     width: MediaQuery.of(context).size.width * 0.02,
                   ),
                   CircleAvatar(
-                    radius: 36.5,
+                    radius: MediaQuery.of(context).size.width * 0.095,
                     backgroundColor: launches[index].success
                         ? Theme.of(context).colorScheme.success
                         : Theme.of(context).colorScheme.error,
                     child: CircleAvatar(
                       backgroundColor: Theme.of(context).colorScheme.onPrimary,
-                      radius: 35.0,
+                      radius: MediaQuery.of(context).size.width * 0.090,
                       child: SizedBox.fromSize(
                         child: Image.network(
                           launches[index].patch,
