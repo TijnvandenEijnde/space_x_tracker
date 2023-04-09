@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:space_x_tracker/providers/launchProvider.dart';
 import 'package:space_x_tracker/views/home_view.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,15 +13,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'SpaceX launch tracker',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blueAccent,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => LaunchProvider(),
+        )
+      ],
+      child: MaterialApp(
+        title: 'SpaceX launch tracker',
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.blueAccent,
+          ),
         ),
+        home: const HomeView(),
       ),
-      home: const HomeView(),
     );
   }
 }
