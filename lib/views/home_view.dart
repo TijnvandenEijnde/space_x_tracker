@@ -21,15 +21,15 @@ class _HomeViewState extends State<HomeView> {
       capsules: ['5e9e2c5bf359189ef23b2667'],
       cores: [
         Core(
-            core: '5e9e289ff359180ae23b262d',
-            flight: '1',
-            gridfins: false,
-            legs: false,
-            reused: false,
-            landingAttempt: true,
-            landingSuccess: false,
-            landingType: 'Ocean',
-            landpad: '5e9e3033383ecbb9e534e7cc'
+          core: '5e9e289ff359180ae23b262d',
+          flight: '1',
+          gridfins: false,
+          legs: false,
+          reused: false,
+          landingAttempt: true,
+          landingSuccess: false,
+          landingType: 'Ocean',
+          landpad: '5e9e3033383ecbb9e534e7cc',
         )
       ],
       crew: [
@@ -66,21 +66,21 @@ class _HomeViewState extends State<HomeView> {
       name: 'FalconSat',
       net: false,
       patch: 'https://images2.imgbox.com/94/f2/NN6Ph45r_o.png',
-      payloads: [
-        '5eb0e4b5b6c3bb0006eeb1e1'
-      ],
+      payloads: ['5eb0e4b5b6c3bb0006eeb1e1'],
       rocket: '5e9d0d95eda69955f709d1eb',
       ships: [
         '5ea6ed2f080df4000697c90b',
         '5ea6ed2f080df4000697c910',
       ],
-      staticFireDateUnix: DateTime.fromMicrosecondsSinceEpoch(1142553600 * 1000),
+      staticFireDateUnix: DateTime.fromMicrosecondsSinceEpoch(
+        1142553600 * 1000,
+      ),
       staticFireDateUtc: DateTime.parse('2006-03-17T00:00:00.000Z'),
       success: false,
       tbd: false,
       upcoming: false,
       webcast: 'https://www.youtube.com/watch?v=0a_00nJ_Y88',
-      window: '900'
+      window: '900',
     )
   ];
 
