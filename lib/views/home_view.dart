@@ -4,6 +4,7 @@ import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
 import 'package:space_x_tracker/widgets/card_list_view.dart';
 import 'package:http/http.dart' as http;
+import 'package:space_x_tracker/widgets/flash_message.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -16,9 +17,10 @@ class _HomeViewState extends State<HomeView> {
   List<Launch> launches = [];
 
   Future<void> _getLaunches() async {
-    Provider.of<LaunchProvider>(context, listen: false).fetchLaunches().then(
-        (_) => launches =
-            Provider.of<LaunchProvider>(context, listen: false).allLaunches);
+    await Provider.of<LaunchProvider>(context, listen: false)
+        .fetchLaunches()
+        .catchError(
+            (_) => FlashMessage.show(context: context, message: 'Unable to retrieve data'));
   }
 
   @override
@@ -44,7 +46,10 @@ class _HomeViewState extends State<HomeView> {
       body: launches.isEmpty == true
           ? const Center(child: CircularProgressIndicator())
           : Consumer<LaunchProvider>(builder: (context, launch, child) {
-              return CardViewList(client: http.Client(), launches: launches,);
+              return CardViewList(
+                client: http.Client(),
+                launches: launches,
+              );
             }),
     );
   }
