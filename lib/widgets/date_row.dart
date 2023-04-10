@@ -4,7 +4,10 @@ import 'package:intl/intl.dart';
 class DateRow extends StatelessWidget {
   final DateTime? date;
 
-  const DateRow({Key? key, required this.date}) : super(key: key);
+  const DateRow({
+    Key? key,
+    required this.date,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

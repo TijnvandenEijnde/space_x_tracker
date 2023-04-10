@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:space_x_tracker/providers/launchProvider.dart';
+import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/views/home_view.dart';
 import 'package:provider/provider.dart';
 

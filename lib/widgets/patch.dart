@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class Patch extends StatelessWidget {
   final String? networkSource;
 
-  const Patch({Key? key, required this.networkSource}) : super(key: key);
+  const Patch({
+    Key? key,
+    required this.networkSource,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,10 @@ import 'package:space_x_tracker/widgets/text_row.dart';
 class LaunchCard extends StatelessWidget {
   final Launch launch;
 
-  const LaunchCard({Key? key, required this.launch}) : super(key: key);
+  const LaunchCard({
+    Key? key,
+    required this.launch,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +75,9 @@ class LaunchCard extends StatelessWidget {
                 left: MediaQuery.of(context).size.width * 0.02,
                 right: MediaQuery.of(context).size.width * 0.02,
               ),
-              child: Patch(key: ValueKey('patch-${launch.id}'), networkSource: launch.links?.patch?.small),
+              child: Patch(
+                  key: ValueKey('patch-${launch.id}'),
+                  networkSource: launch.links?.patch?.small),
             ),
             SizedBox(width: MediaQuery.of(context).size.width * 0.04),
             SizedBox(
