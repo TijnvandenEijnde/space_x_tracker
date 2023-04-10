@@ -29,18 +29,28 @@ void main() {
 
   Future<void> createWidgetUnderTest(WidgetTester tester) async {
     Widget widgetUnderTest = MaterialApp(
-      home: CardViewList(client: client, launches: launches)
+      home: CardViewList(client: client, launches: launches),
     );
 
     await mockNetworkImagesFor(() => tester.pumpWidget(widgetUnderTest));
   }
 
-  testWidgets('it should display a list of launch cards', (WidgetTester tester) async {
+  testWidgets('it should display a list of launch cards',
+      (WidgetTester tester) async {
     await createWidgetUnderTest(tester);
 
-    Finder failedLaunchCard = find.ancestor(of: find.text('FAILED'), matching: find.byType(LaunchCard));
-    Finder successLaunchCard = find.ancestor(of: find.text('SUCCESS'), matching: find.byType(LaunchCard));
-    Finder upcomingLaunchCard = find.ancestor(of: find.text('UPCOMING'), matching: find.byType(LaunchCard));
+    Finder failedLaunchCard = find.ancestor(
+      of: find.text('FAILED'),
+      matching: find.byType(LaunchCard),
+    );
+    Finder successLaunchCard = find.ancestor(
+      of: find.text('SUCCESS'),
+      matching: find.byType(LaunchCard),
+    );
+    Finder upcomingLaunchCard = find.ancestor(
+      of: find.text('UPCOMING'),
+      matching: find.byType(LaunchCard),
+    );
     Finder launchCards = find.byType(LaunchCard);
 
     expect(failedLaunchCard, findsOneWidget);

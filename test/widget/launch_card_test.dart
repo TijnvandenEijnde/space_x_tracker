@@ -48,12 +48,16 @@ void main() {
       expect(crew.icon, Icons.person);
     });
 
-    testWidgets('it displays a text widget with a rocket when patch data is null',
+    testWidgets(
+        'it displays a text widget with a rocket when patch data is null',
         (WidgetTester tester) async {
       await createWidgetUnderTest(tester, LaunchData.upcomingLaunch);
 
-      Finder image = find.byWidgetPredicate((Widget widget) =>
-      widget is Image && widget.key == ValueKey('patch-${LaunchData.upcomingLaunch.id}'));
+      Finder image = find.byWidgetPredicate(
+        (Widget widget) =>
+            widget is Image &&
+            widget.key == ValueKey('patch-${LaunchData.upcomingLaunch.id}'),
+      );
       Finder rocket = find.text('🚀');
       Text rocketTextWidget = tester.widget(rocket);
 
