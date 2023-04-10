@@ -3,15 +3,14 @@
 #flutter format
 printf "\e[33;1m%s\e[0m\n" 'Running flutter format'
 
-result=$(flutter format .)
+result=$(dart format .)
 result_lines=$(echo "$result" | wc -l)
 
 if [ "$result_lines" -gt 1 ]; then
   echo "$result"
-  printf "\e[31;1m%s\e[0m\n" 'Flutter format applied changes, please recommit'
+  printf "\e[31;1m%s\e[0m\n" 'Dart format applied changes, please recommit'
   exit 1
 
-  # @todo recommit current files git add current changed files git commit same message
 fi
 
 echo "$result"

@@ -5,6 +5,7 @@ import 'package:space_x_tracker/providers/models/launch.dart';
 import 'package:space_x_tracker/widgets/card_list_view.dart';
 import 'package:http/http.dart' as http;
 import 'package:space_x_tracker/widgets/flash_message.dart';
+import 'package:space_x_tracker/widgets/launch_search_delegate.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -20,7 +21,9 @@ class _HomeViewState extends State<HomeView> {
     await Provider.of<LaunchProvider>(context, listen: false)
         .fetchLaunches()
         .catchError(
-            (_) => FlashMessage.show(context: context, message: 'Unable to retrieve data'));
+          (_) => FlashMessage.show(
+              context: context, message: 'Unable to retrieve data'),
+        );
   }
 
   @override
@@ -42,6 +45,17 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.search,
+              color: Theme.of(context).colorScheme.background,
+            ),
+            onPressed: () => showSearch(
+                context: context,
+                delegate: LaunchSearchDelegate(launches: launches)),
+          )
+        ],
       ),
       body: launches.isEmpty == true
           ? const Center(child: CircularProgressIndicator())
