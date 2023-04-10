@@ -78,8 +78,12 @@ class LaunchCard extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  WidgetRow(widgets: widgetsRowTwo, width: MediaQuery.of(context).size.width * 0.70),
-                  WidgetRow(widgets: widgetsRowOne, width: MediaQuery.of(context).size.width * 0.70),
+                  WidgetRow(
+                      widgets: widgetsRowTwo,
+                      width: MediaQuery.of(context).size.width * 0.70),
+                  WidgetRow(
+                      widgets: widgetsRowOne,
+                      width: MediaQuery.of(context).size.width * 0.70),
                   IconRow(
                     icons: icons,
                     widget: StatusText(
