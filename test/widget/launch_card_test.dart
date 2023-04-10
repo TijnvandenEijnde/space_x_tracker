@@ -20,7 +20,8 @@ void main() {
       (WidgetTester tester) async {
     await createWidgetUnderTest(tester);
 
-    Finder image = find.byWidgetPredicate((Widget widget) => widget is Image && widget.key == ValueKey('patch-${launch.id}'));
+    Finder image = find.byWidgetPredicate((Widget widget) =>
+        widget is Image && widget.key == ValueKey('patch-${launch.id}'));
     Finder flightNumber = find.text('#${launch.flightNumber.toString()}');
     Finder name = find.text(launch.name!);
     Finder failed = find.text('FAILED');
@@ -28,7 +29,7 @@ void main() {
       DateFormat('MMM d y, h:mm:ss a').format(launch.dateLocal!),
     );
     Finder icons = find.byType(IconRowItem);
-    Widget crew = tester.widget(icons.first);
+    IconRowItem crew = tester.widget(icons.first);
 
     expect(image, findsOneWidget);
     expect(image.toString().contains(launch.links!.patch!.small!), true);
@@ -39,7 +40,9 @@ void main() {
     expect(date, findsOneWidget);
 
     expect(icons, findsNWidgets(4));
-    expect(crew, isA<IconRowItem>().having((item) => item.count, 'count', launch.crew!.length.toString()));
-    expect(crew, isA<IconRowItem>().having((item) => item.icon, 'icon', Icons.person));
+    expect(crew.count, launch.crew!.length.toString());
+    expect(crew.icon, Icons.person);
+  });
+
   });
 }
