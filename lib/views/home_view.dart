@@ -42,7 +42,7 @@ class _HomeViewState extends State<HomeView> {
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: launches.isEmpty == true
-          ? const Placeholder()
+          ? const Center(child: CircularProgressIndicator())
           : Consumer<LaunchProvider>(builder: (context, launch, child) {
               return CardViewList(client: http.Client(), launches: launches,);
             }),
