@@ -11,14 +11,16 @@ class Patch extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.175,
       height: MediaQuery.of(context).size.height * 0.09,
       child: networkSource == null
-      ? const Text('🚀', style: TextStyle(
-        fontSize: 50
-      ),)
-      : Image.network(
-        networkSource!,
-        scale: 4.5,
-        fit: BoxFit.contain,
-      ),
+          ? const Text(
+              '🚀',
+              style: TextStyle(fontSize: 50),
+            )
+          : Image.network(
+              networkSource!,
+              key: key,
+              scale: 4.5,
+              fit: BoxFit.contain,
+            ),
     );
   }
 }
