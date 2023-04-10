@@ -9,6 +9,10 @@ import 'package:space_x_tracker/widgets/launch_card.dart';
 import 'launch_data.dart';
 
 void main() {
+  final Color errorColor = const Color(0xffd32f2f);
+  final Color successColor = const Color(0xFF39DC03);
+  // final Color primaryColor = const Color(0xFF39DC03);
+
   final Launch launch = LaunchData.launch.first;
 
   Future<void> createWidgetUnderTest(WidgetTester tester) async {
@@ -44,5 +48,26 @@ void main() {
     expect(crew.icon, Icons.person);
   });
 
+  group('status', () {
+    testWidgets(
+        'it should change the status to failed and the color to red when success data is false',
+        (WidgetTester tester) async {
+      await createWidgetUnderTest(tester);
+
+      Finder status = find.text('FAILED');
+      Text statusTextWidget = tester.widget(status);
+
+      Finder card = find.byType(Card);
+      Card cardWidget = tester.widget<Card>(card);
+
+      final shape = cardWidget.shape as RoundedRectangleBorder;
+      final side = shape.side;
+      final borderColor = side.color;
+
+      expect(status, findsOneWidget);
+      expect(statusTextWidget.style?.color, errorColor);
+      expect(card, findsOneWidget);
+      expect(borderColor, errorColor);
+    });
   });
 }
