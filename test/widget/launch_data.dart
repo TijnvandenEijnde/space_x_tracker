@@ -1,7 +1,7 @@
 import 'package:space_x_tracker/providers/models/launch.dart';
 
 class LaunchData {
-  static final Map<String, dynamic> _launchData = {
+  static final Map<String, dynamic> launchData = {
       'fairings': {
         'reused': false,
         'recovery_attempt': false,
@@ -77,21 +77,25 @@ class LaunchData {
   };
 
   static Launch get successLaunch {
-    Map<String, dynamic> launchData = {..._launchData};
-    launchData['success'] = true;
-    Launch launch = Launch.fromJson(launchData);
+    Map<String, dynamic> modifiedLaunchData = {...launchData};
+    modifiedLaunchData['success'] = true;
+    Launch launch = Launch.fromJson(modifiedLaunchData);
 
     return launch;
   }
 
   static Launch get failedLaunch {
-    return Launch.fromJson(_launchData);
+    return Launch.fromJson(launchData);
   }
 
   static Launch get upcomingLaunch {
-    Map<String, dynamic> launchData = {..._launchData};
-    launchData['upcoming'] = true;
-    Launch launch = Launch.fromJson(launchData);
+    Map<String, dynamic> modifiedLaunchData = {...launchData};
+    modifiedLaunchData['upcoming'] = true;
+    modifiedLaunchData['links']['patch'] = {
+      'small': null,
+      'large': null,
+    };
+    Launch launch = Launch.fromJson(modifiedLaunchData);
 
     return launch;
   }
