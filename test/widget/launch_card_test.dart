@@ -9,20 +9,19 @@ import 'package:space_x_tracker/widgets/launch_card.dart';
 import 'launch_data.dart';
 
 void main() {
-  final Color errorColor = const Color(0xffd32f2f);
-  final Color successColor = const Color(0xFF39DC03);
-  // final Color primaryColor = const Color(0xFF39DC03);
+  final Launch launch = LaunchData.failedLaunch;
+  const Color errorColor = Color(0xffd32f2f);
+  const Color successColor = Color(0xFF39DC03);
+  const Color primaryColor = MaterialColor(0xff2196f3, {});
 
-  final Launch launch = LaunchData.launch.first;
-
-  Future<void> createWidgetUnderTest(WidgetTester tester) async {
+  Future<void> createWidgetUnderTest(WidgetTester tester, Launch launch) async {
     Widget widgetUnderTest = MaterialApp(home: LaunchCard(launch: launch));
     await mockNetworkImagesFor(() => tester.pumpWidget(widgetUnderTest));
   }
 
   testWidgets('it displays the correct data on the card',
       (WidgetTester tester) async {
-    await createWidgetUnderTest(tester);
+    await createWidgetUnderTest(tester, launch);
 
     Finder image = find.byWidgetPredicate((Widget widget) =>
         widget is Image && widget.key == ValueKey('patch-${launch.id}'));
@@ -50,9 +49,9 @@ void main() {
 
   group('status', () {
     testWidgets(
-        'it should change the status to failed and the color to red when success data is false',
+        'it should change the status to failed and the color to the error color when success data is false',
         (WidgetTester tester) async {
-      await createWidgetUnderTest(tester);
+      await createWidgetUnderTest(tester, launch);
 
       Finder status = find.text('FAILED');
       Text statusTextWidget = tester.widget(status);
@@ -68,6 +67,48 @@ void main() {
       expect(statusTextWidget.style?.color, errorColor);
       expect(card, findsOneWidget);
       expect(borderColor, errorColor);
+    });
+
+    testWidgets(
+        'it should change the status to success and the color to the success color when success data is true',
+        (WidgetTester tester) async {
+      await createWidgetUnderTest(tester, LaunchData.successLaunch);
+
+      Finder status = find.text('SUCCESS');
+      Text statusTextWidget = tester.widget(status);
+
+      Finder card = find.byType(Card);
+      Card cardWidget = tester.widget<Card>(card);
+
+      final shape = cardWidget.shape as RoundedRectangleBorder;
+      final side = shape.side;
+      final borderColor = side.color;
+
+      expect(status, findsOneWidget);
+      expect(statusTextWidget.style?.color, successColor);
+      expect(card, findsOneWidget);
+      expect(borderColor, successColor);
+    });
+
+    testWidgets(
+        'it should change the status to upcoming and the color to the primary color when upcoming data is true',
+        (WidgetTester tester) async {
+      await createWidgetUnderTest(tester, LaunchData.upcomingLaunch);
+
+      Finder status = find.text('UPCOMING');
+      Text statusTextWidget = tester.widget(status);
+
+      Finder card = find.byType(Card);
+      Card cardWidget = tester.widget<Card>(card);
+
+      final shape = cardWidget.shape as RoundedRectangleBorder;
+      final side = shape.side;
+      final borderColor = side.color;
+
+      expect(status, findsOneWidget);
+      expect(statusTextWidget.style?.color?.value, primaryColor.value);
+      expect(card, findsOneWidget);
+      expect(borderColor.value, primaryColor.value);
     });
   });
 }
