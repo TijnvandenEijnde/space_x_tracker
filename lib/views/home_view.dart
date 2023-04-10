@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:space_x_tracker/providers/launchProvider.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
 import 'package:space_x_tracker/widgets/card_list_view.dart';
+import 'package:http/http.dart' as http;
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -43,7 +44,7 @@ class _HomeViewState extends State<HomeView> {
       body: launches.isEmpty == true
           ? const Placeholder()
           : Consumer<LaunchProvider>(builder: (context, launch, child) {
-              return CardViewList(launches: launches);
+              return CardViewList(client: http.Client(), launches: launches,);
             }),
     );
   }
