@@ -4,11 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:space_x_tracker/providers/models/launch.dart';
 
-class LaunchProvider extends ChangeNotifier{
+class LaunchProvider extends ChangeNotifier {
   List<Launch> _launches = [];
 
   List<Launch> get allLaunches {
     return _launches;
+  }
+
+  void sortLaunches() {
+    _launches.sort((a, b) => a.name!.compareTo(b.name!));
+    notifyListeners();
   }
 
   Future<void> fetchLaunches() async {
