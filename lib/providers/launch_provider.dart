@@ -11,8 +11,44 @@ class LaunchProvider extends ChangeNotifier {
     return _launches;
   }
 
-  void sortLaunches() {
-    _launches.sort((a, b) => a.name!.compareTo(b.name!));
+  void sortLaunches(String attribute) {
+    _launches.sort((a, b) {
+      switch (attribute) {
+        case 'name':
+          {
+            // Make sure that null values are checked and places them at the end of the list
+            return a.name == null
+                ? 1
+                : b.name == null
+                    ? -1
+                    : a.name!.toLowerCase().compareTo(b.name!.toLowerCase());
+          }
+
+        case 'dateLocal':
+          {
+            {
+              return a.dateLocal == null
+                  ? 1
+                  : b.dateLocal == null
+                      ? -1
+                      : a.dateLocal!.compareTo(b.dateLocal!);
+            }
+          }
+
+        case 'status': {
+          return a.determineStatus.toLowerCase().compareTo(b.determineStatus.toLowerCase());
+        }
+
+        default:
+          {
+            return a.flightNumber == null
+                ? 1
+                : b.flightNumber == null
+                    ? -1
+                    : a.flightNumber!.compareTo(b.flightNumber!);
+          }
+      }
+    });
     notifyListeners();
   }
 
