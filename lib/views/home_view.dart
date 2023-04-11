@@ -55,53 +55,7 @@ class _HomeViewState extends State<HomeView> {
               backgroundColor: Theme.of(context).colorScheme.onPrimary,
               context: context,
               builder: (BuildContext context) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: SizedBox(
-                    height: 200,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Center(
-                          child: Text(
-                            'Sort by',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium
-                                ?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onBackground),
-                          ),
-                        ),
-                        const Divider(indent: 100, endIndent: 100),
-                        InkWell(
-                          onTap: () => Provider.of<LaunchProvider>(context, listen: false).sortLaunches(),
-                          highlightColor: Theme.of(context).colorScheme.tertiary,
-                          splashColor: Theme.of(context).colorScheme.tertiary,
-                            child: Container(
-                              color: Colors.transparent,
-                              alignment: Alignment.centerLeft,
-                              height: 40,
-                              width: double.infinity,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 20),
-                                child: Text('Name', style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                  fontWeight: FontWeight.normal,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onBackground),),
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                );
+                return const SortingBottomSheet();
               },
             ),
           ),
