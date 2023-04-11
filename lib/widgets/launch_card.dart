@@ -17,7 +17,7 @@ class LaunchCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool success = launch.success == null || launch.success == false;
+    final String status = launch.determineStatus;
     final Map<IconData, String> icons = {
       Icons.person: launch.crew?.length.toString() ?? '0',
       Icons.support: launch.cores?.length.toString() ?? '0',
@@ -46,16 +46,17 @@ class LaunchCard extends StatelessWidget {
         ),
       )
     ];
+    final Map<String, Color> statusColors = {
+      'FAILED': Theme.of(context).colorScheme.error,
+      'SUCCESS': Theme.of(context).colorScheme.success,
+      'UPCOMING': Theme.of(context).colorScheme.tertiary,
+    };
 
     return Card(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
         side: BorderSide(
-          color: success
-              ? launch.upcoming == true
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.error
-              : Theme.of(context).colorScheme.success,
+          color: statusColors[status]!,
           width: 1.5,
         ),
       ),
@@ -86,10 +87,7 @@ class LaunchCard extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.70),
                   IconRow(
                     icons: icons,
-                    widget: StatusText(
-                      success: success,
-                      upcoming: launch.upcoming ?? false,
-                    ),
+                    widget: StatusText(status: status, color: statusColors[status]!,),
                   ),
                 ],
               ),

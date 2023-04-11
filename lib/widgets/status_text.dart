@@ -1,31 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:space_x_tracker/custom_color_scheme.dart';
 
 class StatusText extends StatelessWidget {
-  final bool success;
-  final bool upcoming;
+  final String status;
+  final Color color;
 
   const StatusText({
     Key? key,
-    required this.success,
-    required this.upcoming,
+    required this.status,
+    required this.color,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      success
-          ? upcoming == true
-              ? 'UPCOMING'
-              : 'FAILED'
-          : 'SUCCESS',
+      status,
       style: TextStyle(
         fontWeight: FontWeight.bold,
-        color: success
-            ? upcoming == true
-                ? Theme.of(context).colorScheme.primary
-                : Theme.of(context).colorScheme.error
-            : Theme.of(context).colorScheme.success,
+        color: color,
       ),
     );
   }
