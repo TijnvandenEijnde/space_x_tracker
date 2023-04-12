@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:space_x_tracker/widgets/sorting_bottom_sheet_item.dart';
+import 'package:space_x_tracker/widgets/sorting/sorting_bottom_sheet_item.dart';
 
 class SortingBottomSheet extends StatelessWidget {
   const SortingBottomSheet({Key? key}) : super(key: key);
@@ -16,6 +16,7 @@ class SortingBottomSheet extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: SizedBox(
+        // @TODO use MediaQueries
         height: 200,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -29,11 +30,12 @@ class SortingBottomSheet extends StatelessWidget {
               ),
             ),
             const Divider(indent: 100, endIndent: 100),
+            // @TODO might be an unnecessary column
             Column(
+              // @TODO what if we select multiple items they will all be orange, would a provider help here?
               children: sortingAttributes.entries
                   .map(
                     (attribute) => SortingBottomSheetItem(
-                      enabled: false,
                       sortingAttribute: attribute.key,
                       text: attribute.value,
                     ),
