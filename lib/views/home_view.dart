@@ -48,6 +48,14 @@ class _HomeViewState extends State<HomeView> {
         actions: [
           IconButton(
             icon: Icon(
+              Icons.swap_vert,
+              color: Theme.of(context).colorScheme.background,
+            ),
+            onPressed: () =>
+                Provider.of<LaunchProvider>(context, listen: false).reverseLaunches()
+          ),
+          IconButton(
+            icon: Icon(
               Icons.sort,
               color: Theme.of(context).colorScheme.onPrimary,
             ),

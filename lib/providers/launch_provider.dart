@@ -52,6 +52,11 @@ class LaunchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void reverseLaunches() {
+    _launches = _launches.reversed.toList();
+    notifyListeners();
+  }
+
   Future<void> fetchLaunches() async {
     final url = Uri.parse('https://api.spacexdata.com/v5/launches');
 
