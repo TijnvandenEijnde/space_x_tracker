@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
+import 'package:space_x_tracker/views/filter_view.dart';
 import 'package:space_x_tracker/widgets/card_list_view.dart';
 import 'package:http/http.dart' as http;
 import 'package:space_x_tracker/widgets/flash_message.dart';
 import 'package:space_x_tracker/widgets/launch_search_delegate.dart';
+import 'package:space_x_tracker/widgets/sorting/sorting_bottom_sheet.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
+
+  static const routeName = '/';
 
   @override
   State<HomeView> createState() => _HomeViewState();
@@ -83,7 +87,7 @@ class _HomeViewState extends State<HomeView> {
             onPressed: () => showSearch(
                 context: context,
                 delegate: LaunchSearchDelegate(launches: launches)),
-          )
+          ),
         ],
       ),
       body: launches.isEmpty == true
