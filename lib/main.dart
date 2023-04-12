@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
+import 'package:space_x_tracker/views/filter_view.dart';
 import 'package:space_x_tracker/views/home_view.dart';
 import 'package:provider/provider.dart';
 
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
           ),
         ),
         home: const HomeView(),
+        routes: {
+          FilterView.routeName: (context) => const FilterView(),
+        },
       ),
     );
   }

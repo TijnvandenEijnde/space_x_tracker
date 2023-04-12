@@ -61,6 +61,14 @@ class _HomeViewState extends State<HomeView> {
           ),
           IconButton(
             icon: Icon(
+              Icons.filter_alt,
+              color: Theme.of(context).colorScheme.background,
+            ),
+            onPressed: () =>
+                Navigator.of(context).pushNamed(FilterView.routeName),
+          ),
+          IconButton(
+            icon: Icon(
               Icons.search,
               color: Theme.of(context).colorScheme.background,
             ),
