@@ -40,6 +40,7 @@ dependencies:
   json_annotation: ^4.8.0
   mockito: ^5.4.0
   network_image_mock: ^2.1.1
+  shared_preferences: ^2.1.0
 
 dev_dependencies:
   flutter_test:
