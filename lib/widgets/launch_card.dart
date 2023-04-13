@@ -17,7 +17,7 @@ class LaunchCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String status = launch.determineStatus;
+    final String status = launch.status;
     final Map<IconData, String> icons = {
       Icons.person: launch.crew?.length.toString() ?? '0',
       Icons.support: launch.cores?.length.toString() ?? '0',

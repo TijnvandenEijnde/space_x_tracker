@@ -69,7 +69,7 @@ class Launch {
 
   factory Launch.fromJson(Map<String, dynamic> json) => _$LaunchFromJson(json);
 
-  String get determineStatus {
+  String get status {
     return success == null || success == false
         ? upcoming == true
             ? 'UPCOMING'

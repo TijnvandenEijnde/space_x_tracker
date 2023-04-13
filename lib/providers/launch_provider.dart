@@ -36,7 +36,7 @@ class LaunchProvider extends ChangeNotifier {
           }
 
         case 'status': {
-          return a.determineStatus.toLowerCase().compareTo(b.determineStatus.toLowerCase());
+          return a.status.toLowerCase().compareTo(b.status.toLowerCase());
         }
 
         default:
