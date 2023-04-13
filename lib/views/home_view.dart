@@ -61,7 +61,7 @@ class _HomeViewState extends State<HomeView> {
           IconButton(
             icon: Icon(
               Icons.sort,
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: Theme.of(context).colorScheme.background,
             ),
             onPressed: () => showModalBottomSheet(
               backgroundColor: Theme.of(context).colorScheme.onPrimary,
