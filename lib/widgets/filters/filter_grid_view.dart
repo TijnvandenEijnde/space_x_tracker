@@ -4,10 +4,13 @@ import 'package:space_x_tracker/widgets/filters/filter_grid_view_item.dart';
 class FilterGridViewList extends StatelessWidget {
   final double height;
   final List<String> texts;
+  final Function(String filter, bool toggle) toggleFilter;
 
   const FilterGridViewList({
     Key? key,
-    required this.texts, required this.height,
+    required this.texts,
+    required this.height,
+    required this.toggleFilter,
   }) : super(key: key);
 
   @override
@@ -28,7 +31,10 @@ class FilterGridViewList extends StatelessWidget {
         shrinkWrap: true,
         itemCount: texts.length,
         itemBuilder: (context, index) {
-          return FilterGridViewItem(text: texts[index]);
+          return FilterGridViewItem(
+            text: texts[index],
+            toggleFilter: toggleFilter,
+          );
         },
       ),
     );

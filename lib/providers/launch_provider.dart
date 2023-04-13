@@ -6,8 +6,14 @@ import 'package:space_x_tracker/providers/models/launch.dart';
 
 class LaunchProvider extends ChangeNotifier {
   List<Launch> _launches = [];
+  List<Launch> _filteredLaunches = [];
+  bool filtered = false;
 
   List<Launch> get allLaunches {
+    if (filtered) {
+      return _filteredLaunches;
+    }
+
     return _launches;
   }
 
@@ -55,6 +61,20 @@ class LaunchProvider extends ChangeNotifier {
   void reverseLaunches() {
     _launches = _launches.reversed.toList();
     notifyListeners();
+  }
+
+  void filterLaunches(List<String>? filters) {
+    if (filters == null) {
+      filtered = false;
+      notifyListeners();
+    } else {
+      filtered = true;
+
+      _filteredLaunches = _launches.where((element) => filters.contains(element.status.toLowerCase()) || filters.contains(element.dateLocal!.year.toString())).toList();
+      notifyListeners();
+    }
+
+
   }
 
   Future<void> fetchLaunches() async {
