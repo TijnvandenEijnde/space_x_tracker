@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:space_x_tracker/filter_types.dart';
 import 'package:space_x_tracker/widgets/filters/filter_grid_view_item.dart';
 
 class FilterGridViewList extends StatelessWidget {
   final double height;
   final List<String> texts;
-  final Function(String filter, bool toggle) toggleFilter;
+  final Function(String filter, bool toggle, FilterTypes type) toggleFilter;
   final Map<String, bool> enabledItems;
+  final FilterTypes type;
 
   const FilterGridViewList({
     Key? key,
@@ -13,6 +15,7 @@ class FilterGridViewList extends StatelessWidget {
     required this.height,
     required this.toggleFilter,
     required this.enabledItems,
+    required this.type,
   }) : super(key: key);
 
   @override
@@ -38,7 +41,10 @@ class FilterGridViewList extends StatelessWidget {
           return FilterGridViewItem(
             text: text,
             toggleFilter: toggleFilter,
-            enabled: enabledItems.containsKey(text.toLowerCase()) ? enabledItems[text.toLowerCase()]! : false,
+            enabled: enabledItems.containsKey(text.toLowerCase())
+                ? enabledItems[text.toLowerCase()]!
+                : false,
+            type: type,
           );
         },
       ),

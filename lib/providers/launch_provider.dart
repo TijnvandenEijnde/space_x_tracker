@@ -65,20 +65,30 @@ class LaunchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> filterLaunches(List<String>? filters) async {
+  Future<void> filterLaunches(Map<String, dynamic> filters) async {
     final preferences = await SharedPreferences.getInstance();
 
-    if (filters == null) {
+    if (filters.isEmpty == true) {
       filtered = false;
       preferences.remove('filters');
       notifyListeners();
     } else {
       filtered = true;
       _filteredLaunches = _launches.where((element) {
-        return (filters.contains(element.status.toLowerCase()) &&
-            filters.contains(element.dateLocal!.year.toString()));
+        if ((filters.containsKey('years') && filters['years'] != []) && (filters.containsKey('statuses') && filters['statuses'] != [])) {
+          return filters['years']!.contains(element.dateLocal!.year.toString())
+              && filters['statuses']!.contains(element.status.toLowerCase());
+        }
+
+        if (filters.containsKey('years') && filters['years'] != []) {
+          return filters['years']!.contains(element.dateLocal!.year.toString());
+        }
+
+        return filters['statuses']!.contains(element.status.toLowerCase());
       }).toList();
-      preferences.setStringList('filters', filters);
+
+      String filterList = jsonEncode((filters));
+      preferences.setString('filters', filterList);
       notifyListeners();
     }
   }

@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:space_x_tracker/filter_types.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/widgets/filters/filter_grid_view.dart';
 import 'package:space_x_tracker/widgets/filters/filter_sub_title.dart';
@@ -15,8 +18,7 @@ class FilterView extends StatefulWidget {
 }
 
 class _FilterViewState extends State<FilterView> {
-  List<String> filters = [];
-  List<String> types = [];
+  Map<String, List<String>> filters = {};
   Map<String, bool> enabledItems = {};
   final List<String> statuses = [
     'Failed',
@@ -31,10 +33,30 @@ class _FilterViewState extends State<FilterView> {
     final preferences = await SharedPreferences.getInstance();
     if (preferences.containsKey('filters')) {
       setState(() {
-        filters = preferences.getStringList('filters')!;
-        for (var element in filters) {
-          enabledItems[element] = true;
+
+        final sharedFilters = jsonDecode(preferences.getString('filters')!);
+
+        for (var key in sharedFilters.keys) {
+          for (var value in sharedFilters[key]) {
+            if (filters[key] == null) {
+              filters[key] = [];
+            }
+            filters[key]?.add(value);
+          }
         }
+
+        if (filters.containsKey('years')) {
+          for (var element in filters['years']!) {
+            enabledItems[element] = true;
+          }
+        }
+
+        if (filters.containsKey('statuses')) {
+          for (var element in filters['statuses']!) {
+            enabledItems[element] = true;
+          }
+        }
+
       });
     }
   }
@@ -45,15 +67,24 @@ class _FilterViewState extends State<FilterView> {
     setInitialFilters();
   }
 
-  void toggleFilter(String filter, bool toggle) {
+  void toggleFilter(String filter, bool toggle, FilterTypes type) {
     if (toggle == true) {
       setState(() {
-        filters.add(filter.toLowerCase());
+        if (filters[type.name] == null) {
+          filters[type.name] = [];
+        }
+
+        filters[type.name]?.add(filter.toLowerCase());
         enabledItems[filter.toLowerCase()] = true;
       });
     } else {
       setState(() {
-        filters.remove(filter.toLowerCase());
+        filters[type.name]?.remove(filter.toLowerCase());
+
+        if (filters[type.name]?.isEmpty == true) {
+          filters.remove(type.name);
+        }
+
         enabledItems[filter.toLowerCase()] = false;
       });
     }
@@ -65,7 +96,7 @@ class _FilterViewState extends State<FilterView> {
       filters.clear();
     });
 
-    Provider.of<LaunchProvider>(context, listen: false).filterLaunches(null);
+    Provider.of<LaunchProvider>(context, listen: false).filterLaunches({});
   }
 
   @override
@@ -119,6 +150,7 @@ class _FilterViewState extends State<FilterView> {
               texts: statuses,
               toggleFilter: toggleFilter,
               enabledItems: enabledItems,
+              type: FilterTypes.statuses,
             ),
             const FilterSubTitle(text: 'Years'),
             FilterGridViewList(
@@ -126,6 +158,7 @@ class _FilterViewState extends State<FilterView> {
               texts: years,
               toggleFilter: toggleFilter,
               enabledItems: enabledItems,
+              type: FilterTypes.years,
             ),
           ],
         ),
