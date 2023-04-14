@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
 
 class LaunchProvider extends ChangeNotifier {
@@ -41,9 +42,10 @@ class LaunchProvider extends ChangeNotifier {
             }
           }
 
-        case 'status': {
-          return a.status.toLowerCase().compareTo(b.status.toLowerCase());
-        }
+        case 'status':
+          {
+            return a.status.toLowerCase().compareTo(b.status.toLowerCase());
+          }
 
         default:
           {
@@ -63,18 +65,22 @@ class LaunchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void filterLaunches(List<String>? filters) {
+  Future<void> filterLaunches(List<String>? filters) async {
+    final preferences = await SharedPreferences.getInstance();
+
     if (filters == null) {
       filtered = false;
+      preferences.remove('filters');
       notifyListeners();
     } else {
       filtered = true;
-
-      _filteredLaunches = _launches.where((element) => filters.contains(element.status.toLowerCase()) || filters.contains(element.dateLocal!.year.toString())).toList();
+      _filteredLaunches = _launches.where((element) {
+        return (filters.contains(element.status.toLowerCase()) &&
+            filters.contains(element.dateLocal!.year.toString()));
+      }).toList();
+      preferences.setStringList('filters', filters);
       notifyListeners();
     }
-
-
   }
 
   Future<void> fetchLaunches() async {
@@ -86,7 +92,6 @@ class LaunchProvider extends ChangeNotifier {
       _launches = parsed.map<Launch>((json) => Launch.fromJson(json)).toList();
 
       notifyListeners();
-
     } catch (_) {
       rethrow;
     }

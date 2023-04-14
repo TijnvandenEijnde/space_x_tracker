@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class FilterGridViewItem extends StatefulWidget {
   final String text;
   final Function(String string, bool toggle) toggleFilter;
+  final bool enabled;
 
   const FilterGridViewItem({
     Key? key,
     required this.text,
     required this.toggleFilter,
+    required this.enabled,
   }) : super(key: key);
 
   @override
@@ -16,10 +18,10 @@ class FilterGridViewItem extends StatefulWidget {
 
 class _FilterGridViewItemState extends State<FilterGridViewItem> {
   bool enabled = false;
+  bool initial = true;
 
   void toggleFilterItem() {
-    setState(() => enabled = !enabled);
-    widget.toggleFilter(widget.text, enabled);
+    widget.toggleFilter(widget.text, !widget.enabled);
   }
 
   @override
@@ -39,7 +41,7 @@ class _FilterGridViewItemState extends State<FilterGridViewItem> {
               border: Border.all(
                   color: Theme.of(context).colorScheme.surfaceVariant,
                   width: 1.5),
-              color: enabled == true
+              color: widget.enabled == true
                   ? Theme.of(context).colorScheme.tertiary
                   : Colors.transparent,
               borderRadius: BorderRadius.circular(10)),
@@ -47,7 +49,7 @@ class _FilterGridViewItemState extends State<FilterGridViewItem> {
             widget.text,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: enabled == true
+                color: widget.enabled == true
                     ? Theme.of(context).colorScheme.background
                     : Theme.of(context).colorScheme.onBackground),
           ),

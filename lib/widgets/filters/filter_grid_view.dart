@@ -5,12 +5,14 @@ class FilterGridViewList extends StatelessWidget {
   final double height;
   final List<String> texts;
   final Function(String filter, bool toggle) toggleFilter;
+  final Map<String, bool> enabledItems;
 
   const FilterGridViewList({
     Key? key,
     required this.texts,
     required this.height,
     required this.toggleFilter,
+    required this.enabledItems,
   }) : super(key: key);
 
   @override
@@ -31,9 +33,12 @@ class FilterGridViewList extends StatelessWidget {
         shrinkWrap: true,
         itemCount: texts.length,
         itemBuilder: (context, index) {
+          String text = texts[index];
+
           return FilterGridViewItem(
-            text: texts[index],
+            text: text,
             toggleFilter: toggleFilter,
+            enabled: enabledItems.containsKey(text.toLowerCase()) ? enabledItems[text.toLowerCase()]! : false,
           );
         },
       ),

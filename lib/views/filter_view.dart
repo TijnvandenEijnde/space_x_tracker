@@ -1,39 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/widgets/filters/filter_grid_view.dart';
 import 'package:space_x_tracker/widgets/filters/filter_sub_title.dart';
 
-class FilterView extends StatelessWidget {
+class FilterView extends StatefulWidget {
   static const routeName = '/filter';
 
   const FilterView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    List<String> filters = [];
-    final List<String> statuses = [
-      'Failed',
-      'Success',
-      'Upcoming',
-    ];
-    final List<String> years = List<String>.generate(
-        (DateTime.now().year - 2006) + 1,
-        (int index) => (2006 + index).toString());
+  State<FilterView> createState() => _FilterViewState();
+}
 
-    void toggleFilter(String filter, bool toggle) {
-      if (toggle) {
+class _FilterViewState extends State<FilterView> {
+  List<String> filters = [];
+  List<String> types = [];
+  Map<String, bool> enabledItems = {};
+  final List<String> statuses = [
+    'Failed',
+    'Success',
+    'Upcoming',
+  ];
+  final List<String> years = List<String>.generate(
+      (DateTime.now().year - 2006) + 1,
+      (int index) => (2006 + index).toString());
+
+  void setInitialFilters() async {
+    final preferences = await SharedPreferences.getInstance();
+    if (preferences.containsKey('filters')) {
+      setState(() {
+        filters = preferences.getStringList('filters')!;
+        for (var element in filters) {
+          enabledItems[element] = true;
+        }
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setInitialFilters();
+  }
+
+  void toggleFilter(String filter, bool toggle) {
+    if (toggle == true) {
+      setState(() {
         filters.add(filter.toLowerCase());
-      } else {
+        enabledItems[filter.toLowerCase()] = true;
+      });
+    } else {
+      setState(() {
         filters.remove(filter.toLowerCase());
-      }
+        enabledItems[filter.toLowerCase()] = false;
+      });
     }
+  }
 
-    void discardFilters() {
+  void discardFilters() {
+    setState(() {
+      enabledItems.clear();
       filters.clear();
-      Provider.of<LaunchProvider>(context, listen: false).fetchLaunches();
-    }
+    });
 
+    Provider.of<LaunchProvider>(context, listen: false).filterLaunches(null);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
       appBar: AppBar(
@@ -60,7 +96,9 @@ class FilterView extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: () => Provider.of<LaunchProvider>(context, listen: false).filterLaunches(filters),
+            onPressed: () async =>
+                await Provider.of<LaunchProvider>(context, listen: false)
+                    .filterLaunches(filters),
             child: Text(
               'Apply',
               style: Theme.of(context)
@@ -76,9 +114,19 @@ class FilterView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const FilterSubTitle(text: 'Statuses'),
-            FilterGridViewList(height: 82.5, texts: statuses, toggleFilter: toggleFilter),
+            FilterGridViewList(
+              height: 82.5,
+              texts: statuses,
+              toggleFilter: toggleFilter,
+              enabledItems: enabledItems,
+            ),
             const FilterSubTitle(text: 'Years'),
-            FilterGridViewList(height: 380, texts: years, toggleFilter: toggleFilter),
+            FilterGridViewList(
+              height: 380,
+              texts: years,
+              toggleFilter: toggleFilter,
+              enabledItems: enabledItems,
+            ),
           ],
         ),
       ),
