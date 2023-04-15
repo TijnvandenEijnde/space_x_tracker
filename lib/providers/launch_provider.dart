@@ -11,7 +11,7 @@ class LaunchProvider extends ChangeNotifier {
   bool filtered = false;
 
   List<Launch> get allLaunches {
-    if (filtered) {
+    if (filtered == true) {
       return _filteredLaunches;
     }
 
@@ -19,7 +19,9 @@ class LaunchProvider extends ChangeNotifier {
   }
 
   void sortLaunches(String attribute) {
-    _launches.sort((a, b) {
+    final List<Launch> launches = filtered == true ? _filteredLaunches : _launches;
+
+    launches.sort((a, b) {
       switch (attribute) {
         case 'name':
           {
@@ -57,16 +59,21 @@ class LaunchProvider extends ChangeNotifier {
           }
       }
     });
+
     notifyListeners();
   }
 
   void reverseLaunches() {
-    _launches = _launches.reversed.toList();
+    if (filtered == true) {
+      _filteredLaunches = _filteredLaunches.reversed.toList();
+    } else {
+      _launches = _launches.reversed.toList();
+    }
+
     notifyListeners();
   }
 
   Future<void> filterLaunches(Map<String, List<String>> filters) async {
-    // @todo also make sure that the sorting and reversing make use of the filtered values as well.
     final SharedPreferences preferences = await SharedPreferences.getInstance();
 
     if (filters.isEmpty == true) {
