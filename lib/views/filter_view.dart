@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:space_x_tracker/filter_types.dart';
+import 'package:space_x_tracker/widgets/filters/filter_types.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/widgets/filters/filter_grid_view.dart';
 import 'package:space_x_tracker/widgets/filters/filter_sub_title.dart';
