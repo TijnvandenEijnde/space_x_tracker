@@ -29,6 +29,7 @@ class _FilterGridViewItemState extends State<FilterGridViewItem> {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Theme.of(context).colorScheme.onPrimary,
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
         onTap: () => toggleFilterItem(),
@@ -52,8 +53,8 @@ class _FilterGridViewItemState extends State<FilterGridViewItem> {
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: widget.enabled == true
-                    ? Theme.of(context).colorScheme.background
-                    : Theme.of(context).colorScheme.onBackground),
+                    ? Theme.of(context).colorScheme.onPrimary
+                    : Theme.of(context).colorScheme.onPrimaryContainer),
           ),
         ),
       ),

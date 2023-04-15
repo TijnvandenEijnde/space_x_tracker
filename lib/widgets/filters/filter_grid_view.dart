@@ -23,7 +23,7 @@ class FilterGridViewList extends StatelessWidget {
     return Container(
       height: height,
       decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.background,
+          color: Theme.of(context).colorScheme.onPrimary,
           borderRadius: BorderRadius.circular(5)),
       child: GridView.builder(
         padding: const EdgeInsets.only(left: 20, top: 20, right: 20),

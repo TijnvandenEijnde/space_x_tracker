@@ -106,16 +106,16 @@ class _FilterViewState extends State<FilterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         iconTheme: IconThemeData(
           color:
-              Theme.of(context).colorScheme.background, //change your color here
+              Theme.of(context).colorScheme.onPrimary, //change your color here
         ),
         title: Text(
           'Filters',
           style: TextStyle(
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -127,7 +127,7 @@ class _FilterViewState extends State<FilterView> {
               style: Theme.of(context)
                   .textTheme
                   .titleMedium
-                  ?.copyWith(color: Theme.of(context).colorScheme.background),
+                  ?.copyWith(color: Theme.of(context).colorScheme.onPrimary),
             ),
           ),
           TextButton(

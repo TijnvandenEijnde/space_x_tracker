@@ -6,10 +6,6 @@ class ProjectTheme {
     scheme: FlexScheme.shark,
     surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
     blendLevel: 9,
-    subThemesData: const FlexSubThemesData(
-      blendOnLevel: 10,
-      blendOnColors: false,
-    ),
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     useMaterial3: true,
     swapLegacyOnMaterial3: true,

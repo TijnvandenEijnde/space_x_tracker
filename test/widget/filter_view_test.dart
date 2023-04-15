@@ -18,10 +18,10 @@ import 'launch_data.dart';
 @GenerateMocks([http.Client])
 void main() {
   final http.Client client = MockClient();
-  final Launch launch = LaunchData.failedLaunch;
-  const Color whiteColor = Color(0xfff7f7f7);
-  const Color blackColor = Color(0xff090909);
-  const Color tertiaryColor = Color(0xfffb8122);
+  final theme = ProjectTheme.lightTheme;
+  final Color whiteColor = theme!.colorScheme.onPrimary;
+  final Color blackColor = theme.colorScheme.onPrimaryContainer;
+  final Color tertiaryColor = theme.colorScheme.tertiary;
 
   Future<void> createWidgetUnderTest(WidgetTester tester) async {
     Widget widgetUnderTest = ChangeNotifierProvider(
