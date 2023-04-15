@@ -1,7 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
-import 'package:network_image_mock/network_image_mock.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
 import 'package:space_x_tracker/widgets/icon_row_item.dart';
 import 'package:space_x_tracker/widgets/launch_card.dart';
@@ -16,8 +17,10 @@ void main() {
 
   Future<void> createWidgetUnderTest(WidgetTester tester, Launch launch) async {
     Widget widgetUnderTest = MaterialApp(home: LaunchCard(launch: launch));
-    await mockNetworkImagesFor(() => tester.pumpWidget(widgetUnderTest));
+    await tester.pumpWidget(widgetUnderTest);
   }
+
+  setUpAll(() => HttpOverrides.global = null);
 
   group('display', () {
     testWidgets('it displays the correct data on the card',
