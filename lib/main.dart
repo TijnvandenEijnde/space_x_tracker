@@ -1,8 +1,11 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
+import 'package:space_x_tracker/project_theme.dart';
 import 'package:space_x_tracker/views/filter_view.dart';
 import 'package:space_x_tracker/views/home_view.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
@@ -22,15 +25,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'SpaceX launch tracker',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.blueAccent,
-          ),
-        ),
-        home: const HomeView(),
+          theme: ProjectTheme.lightTheme,
+        home: HomeView(client: http.Client()),
         routes: {
-          FilterView.routeName: (context) => const FilterView(),
+          FilterView.routeName: (context) => FilterView(client: http.Client()),
         },
       ),
     );

@@ -7,11 +7,17 @@ import 'package:space_x_tracker/filter_types.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/widgets/filters/filter_grid_view.dart';
 import 'package:space_x_tracker/widgets/filters/filter_sub_title.dart';
+import 'package:http/http.dart' as http;
 
 class FilterView extends StatefulWidget {
+  final http.Client client;
+
   static const routeName = '/filter';
 
-  const FilterView({Key? key}) : super(key: key);
+  const FilterView({
+    Key? key,
+    required this.client,
+  }) : super(key: key);
 
   @override
   State<FilterView> createState() => _FilterViewState();
@@ -30,10 +36,9 @@ class _FilterViewState extends State<FilterView> {
       (int index) => (2006 + index).toString());
 
   void setInitialFilters() async {
-    final preferences = await SharedPreferences.getInstance();
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
     if (preferences.containsKey('filters')) {
       setState(() {
-
         final sharedFilters = jsonDecode(preferences.getString('filters')!);
 
         for (var key in sharedFilters.keys) {
@@ -56,7 +61,6 @@ class _FilterViewState extends State<FilterView> {
             enabledItems[element] = true;
           }
         }
-
       });
     }
   }

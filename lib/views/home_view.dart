@@ -10,7 +10,12 @@ import 'package:space_x_tracker/widgets/launch_search_delegate.dart';
 import 'package:space_x_tracker/widgets/sorting/sorting_bottom_sheet.dart';
 
 class HomeView extends StatefulWidget {
-  const HomeView({Key? key}) : super(key: key);
+  final http.Client client;
+
+  const HomeView({
+    Key? key,
+    required this.client,
+  }) : super(key: key);
 
   static const routeName = '/';
 
@@ -51,13 +56,13 @@ class _HomeViewState extends State<HomeView> {
         backgroundColor: Theme.of(context).colorScheme.primary,
         actions: [
           IconButton(
-            icon: Icon(
-              Icons.swap_vert,
-              color: Theme.of(context).colorScheme.background,
-            ),
-            onPressed: () =>
-                Provider.of<LaunchProvider>(context, listen: false).reverseLaunches()
-          ),
+              icon: Icon(
+                Icons.swap_vert,
+                color: Theme.of(context).colorScheme.background,
+              ),
+              onPressed: () =>
+                  Provider.of<LaunchProvider>(context, listen: false)
+                      .reverseLaunches()),
           IconButton(
             icon: Icon(
               Icons.sort,
