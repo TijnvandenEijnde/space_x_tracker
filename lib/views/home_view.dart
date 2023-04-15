@@ -28,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
 
   Future<void> _getLaunches() async {
     await Provider.of<LaunchProvider>(context, listen: false)
-        .fetchLaunches()
+        .fetchLaunches(widget.client)
         .catchError(
           (_) => FlashMessage.show(
               context: context, message: 'Unable to retrieve data'),
@@ -99,7 +99,6 @@ class _HomeViewState extends State<HomeView> {
           ? const Center(child: CircularProgressIndicator())
           : Consumer<LaunchProvider>(builder: (context, launch, child) {
               return CardViewList(
-                client: http.Client(),
                 launches: launches,
               );
             }),

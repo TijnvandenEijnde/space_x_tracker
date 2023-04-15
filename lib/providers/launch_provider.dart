@@ -65,8 +65,9 @@ class LaunchProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> filterLaunches(Map<String, dynamic> filters) async {
-    final preferences = await SharedPreferences.getInstance();
+  Future<void> filterLaunches(Map<String, List<String>> filters) async {
+    // @todo also make sure that the sorting and reversing make use of the filtered values as well.
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
 
     if (filters.isEmpty == true) {
       filtered = false;
@@ -93,11 +94,11 @@ class LaunchProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> fetchLaunches() async {
+  Future<void> fetchLaunches(http.Client client) async {
     final url = Uri.parse('https://api.spacexdata.com/v5/launches');
 
     try {
-      final response = await http.get(url);
+      final response = await client.get(url);
       final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
       _launches = parsed.map<Launch>((json) => Launch.fromJson(json)).toList();
 

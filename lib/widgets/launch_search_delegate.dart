@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
-import 'package:http/http.dart' as http;
 import 'package:space_x_tracker/widgets/card_list_view.dart';
 
 class LaunchSearchDelegate extends SearchDelegate {
@@ -30,7 +29,6 @@ class LaunchSearchDelegate extends SearchDelegate {
   Widget buildResults(BuildContext context) =>
       Consumer<LaunchProvider>(builder: (context, launch, child) {
         return CardViewList(
-          client: http.Client(),
           launches: results,
         );
       });
@@ -56,7 +54,6 @@ class LaunchSearchDelegate extends SearchDelegate {
 
     return Consumer<LaunchProvider>(builder: (context, launch, child) {
       return CardViewList(
-        client: http.Client(),
         launches: results,
       );
     });

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:space_x_tracker/custom_color_scheme.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
-import 'package:space_x_tracker/widgets/status_text.dart';
 import 'package:space_x_tracker/widgets/icon_row.dart';
 import 'package:space_x_tracker/widgets/patch.dart';
+import 'package:space_x_tracker/widgets/status_text.dart';
 import 'package:space_x_tracker/widgets/widget_row.dart';
 
 class LaunchCard extends StatelessWidget {
@@ -87,7 +87,10 @@ class LaunchCard extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * 0.70),
                   IconRow(
                     icons: icons,
-                    widget: StatusText(status: status, color: statusColors[status]!,),
+                    widget: StatusText(
+                      status: status,
+                      color: statusColors[status]!,
+                    ),
                   ),
                 ],
               ),
