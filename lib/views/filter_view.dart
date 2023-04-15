@@ -7,16 +7,13 @@ import 'package:space_x_tracker/filter_types.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/widgets/filters/filter_grid_view.dart';
 import 'package:space_x_tracker/widgets/filters/filter_sub_title.dart';
-import 'package:http/http.dart' as http;
 
 class FilterView extends StatefulWidget {
-  final http.Client client;
 
   static const routeName = '/filter';
 
   const FilterView({
     Key? key,
-    required this.client,
   }) : super(key: key);
 
   @override

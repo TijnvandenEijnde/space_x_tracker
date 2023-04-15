@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           theme: ProjectTheme.lightTheme,
         home: HomeView(client: http.Client()),
         routes: {
-          FilterView.routeName: (context) => FilterView(client: http.Client()),
+          FilterView.routeName: (context) => const FilterView(),
         },
       ),
     );

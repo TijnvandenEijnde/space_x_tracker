@@ -2,19 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
-import 'package:mockito/annotations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:space_x_tracker/project_theme.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/views/filter_view.dart';
 
-import 'card_list_view_test.mocks.dart';
-
-@GenerateMocks([http.Client])
 void main() {
-  final http.Client client = MockClient();
   final theme = ProjectTheme.lightTheme;
   final Color onPrimaryColor = theme!.colorScheme.onPrimary;
   final Color onPrimaryContainerColor = theme.colorScheme.onPrimaryContainer;
@@ -24,8 +18,8 @@ void main() {
     Widget widgetUnderTest = ChangeNotifierProvider(
       create: (context) => LaunchProvider(),
       child: MaterialApp(
-        home: FilterView(client: client),
-        theme: ProjectTheme.lightTheme,
+        home: const FilterView(),
+        theme: theme,
       ),
     );
 
@@ -108,7 +102,7 @@ void main() {
     });
 
     testWidgets(
-        'it will toggle the filters that are saved in the sharedpreferences on initial load',
+        'it will toggle the filters that are saved in the shared preferences on initial load',
         (WidgetTester tester) async {
       SharedPreferences.setMockInitialValues({
         'filters': jsonEncode({
