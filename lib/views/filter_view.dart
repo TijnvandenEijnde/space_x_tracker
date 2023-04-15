@@ -67,8 +67,8 @@ class _FilterViewState extends State<FilterView> {
     setInitialFilters();
   }
 
-  void toggleFilter(String filter, bool toggle, FilterTypes type) {
-    if (toggle == true) {
+  void toggleFilter(String filter, bool enabled, FilterTypes type) {
+    if (enabled == true) {
       setState(() {
         if (filters[type.name] == null) {
           filters[type.name] = [];

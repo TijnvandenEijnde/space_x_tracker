@@ -3,7 +3,7 @@ import 'package:space_x_tracker/filter_types.dart';
 
 class FilterGridViewItem extends StatefulWidget {
   final String text;
-  final Function(String string, bool toggle, FilterTypes type) toggleFilter;
+  final Function(String filter, bool enabled, FilterTypes type) toggleFilter;
   final bool enabled;
   final FilterTypes type;
 
@@ -11,7 +11,8 @@ class FilterGridViewItem extends StatefulWidget {
     Key? key,
     required this.text,
     required this.toggleFilter,
-    required this.enabled, required this.type,
+    required this.enabled,
+    required this.type,
   }) : super(key: key);
 
   @override
@@ -19,9 +20,6 @@ class FilterGridViewItem extends StatefulWidget {
 }
 
 class _FilterGridViewItemState extends State<FilterGridViewItem> {
-  bool enabled = false;
-  bool initial = true;
-
   void toggleFilterItem() {
     widget.toggleFilter(widget.text, !widget.enabled, widget.type);
   }

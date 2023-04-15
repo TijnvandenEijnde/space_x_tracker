@@ -18,30 +18,24 @@ class LaunchProvider extends ChangeNotifier {
     return _launches;
   }
 
-  void sortLaunches(String attribute) {
-    final List<Launch> launches = filtered == true ? _filteredLaunches : _launches;
+  Future<void> sortLaunches(String attribute) async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    final List<Launch> launches =
+        filtered == true ? _filteredLaunches : _launches;
 
     launches.sort((a, b) {
       switch (attribute) {
         case 'name':
           {
-            // Make sure that null values are checked and places them at the end of the list
-            return a.name == null
-                ? 1
-                : b.name == null
-                    ? -1
-                    : a.name!.toLowerCase().compareTo(b.name!.toLowerCase());
+            return calculateSort(a.name, b.name,
+                a.name!.toLowerCase().compareTo(b.name!.toLowerCase()));
           }
 
         case 'dateLocal':
           {
-            {
-              return a.dateLocal == null
-                  ? 1
-                  : b.dateLocal == null
-                      ? -1
-                      : a.dateLocal!.compareTo(b.dateLocal!);
-            }
+            return calculateSort(
+                a.dateLocal, b.dateLocal, a.dateLocal!.compareTo(b.dateLocal!));
           }
 
         case 'status':
@@ -51,16 +45,24 @@ class LaunchProvider extends ChangeNotifier {
 
         default:
           {
-            return a.flightNumber == null
-                ? 1
-                : b.flightNumber == null
-                    ? -1
-                    : a.flightNumber!.compareTo(b.flightNumber!);
+            return calculateSort(a.flightNumber, b.flightNumber,
+                a.flightNumber!.compareTo(b.flightNumber!));
           }
       }
     });
 
+    preferences.setString('sort', attribute);
+
     notifyListeners();
+  }
+
+  int calculateSort(dynamic a, dynamic b, int comparison) {
+    // Make sure that null values are checked and places them at the end of the list
+    return a == null
+        ? 1
+        : b == null
+            ? -1
+            : a.compareTo(b);
   }
 
   void reverseLaunches() {
@@ -83,9 +85,11 @@ class LaunchProvider extends ChangeNotifier {
     } else {
       filtered = true;
       _filteredLaunches = _launches.where((element) {
-        if ((filters.containsKey('years') && filters['years'] != []) && (filters.containsKey('statuses') && filters['statuses'] != [])) {
-          return filters['years']!.contains(element.dateLocal!.year.toString())
-              && filters['statuses']!.contains(element.status.toLowerCase());
+        if ((filters.containsKey('years') && filters['years'] != []) &&
+            (filters.containsKey('statuses') && filters['statuses'] != [])) {
+          return filters['years']!
+                  .contains(element.dateLocal!.year.toString()) &&
+              filters['statuses']!.contains(element.status.toLowerCase());
         }
 
         if (filters.containsKey('years') && filters['years'] != []) {

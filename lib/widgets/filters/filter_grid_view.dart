@@ -5,7 +5,7 @@ import 'package:space_x_tracker/widgets/filters/filter_grid_view_item.dart';
 class FilterGridViewList extends StatelessWidget {
   final double height;
   final List<String> texts;
-  final Function(String filter, bool toggle, FilterTypes type) toggleFilter;
+  final Function(String filter, bool enabled, FilterTypes type) toggleFilter;
   final Map<String, bool> enabledItems;
   final FilterTypes type;
 

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:space_x_tracker/providers/launch_provider.dart';
 
 class SortingBottomSheetItem extends StatefulWidget {
   final String text;
-  final String sortingAttribute;
+  final String sort;
+  final bool enabled;
+  final Function(String sort) toggleSort;
 
   const SortingBottomSheetItem({
     Key? key,
     required this.text,
-    required this.sortingAttribute,
+    required this.sort,
+    required this.enabled,
+    required this.toggleSort,
   }) : super(key: key);
 
   @override
@@ -17,24 +19,16 @@ class SortingBottomSheetItem extends StatefulWidget {
 }
 
 class _SortingBottomSheetItemState extends State<SortingBottomSheetItem> {
-  bool enabled = false;
-
-  void toggleSortAttribute() {
-    setState(() => enabled = !enabled);
-  }
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Provider.of<LaunchProvider>(context, listen: false)
-            .sortLaunches(widget.sortingAttribute);
-        toggleSortAttribute();
-      },
+      onTap: () => widget.toggleSort(widget.sort),
       highlightColor: Theme.of(context).colorScheme.tertiary,
       splashColor: Theme.of(context).colorScheme.tertiary,
       child: Container(
-        color: enabled == true ? Theme.of(context).colorScheme.tertiary : Colors.transparent,
+        color: widget.enabled == true
+            ? Theme.of(context).colorScheme.tertiary
+            : Colors.transparent,
         alignment: Alignment.centerLeft,
         height: 40,
         width: double.infinity,
@@ -44,7 +38,9 @@ class _SortingBottomSheetItemState extends State<SortingBottomSheetItem> {
             widget.text,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.normal,
-                color: enabled == true ? Theme.of(context).colorScheme.background : Theme.of(context).colorScheme.onBackground),
+                color: widget.enabled == true
+                    ? Theme.of(context).colorScheme.background
+                    : Theme.of(context).colorScheme.onBackground),
           ),
         ),
       ),
