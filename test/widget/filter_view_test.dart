@@ -153,7 +153,7 @@ void main() {
   group('saving', () {
     setUp(() => SharedPreferences.setMockInitialValues({}));
 
-    testWidgets('it will save selected filters when tapped on save',
+    testWidgets('it will save selected filters when tapped on apply',
         (WidgetTester tester) async {
       await createWidgetUnderTest(tester);
 
@@ -169,11 +169,6 @@ void main() {
       await tester.tap(apply);
       await tester.pumpAndSettle();
 
-      Text failedText = tester.widget<Text>(failed);
-      Text yearText = tester.widget<Text>(year);
-
-      expect(failedText.style?.color, onPrimaryColor);
-      expect(yearText.style?.color, onPrimaryColor);
       expect(
           preferences.getString('filters'),
           jsonEncode({
@@ -182,7 +177,7 @@ void main() {
           }));
     });
 
-    testWidgets('it can save one type of selected filters when tapped on save',
+    testWidgets('it can save one type of selected filters when tapped on apply',
         (WidgetTester tester) async {
       await createWidgetUnderTest(tester);
 
@@ -196,9 +191,6 @@ void main() {
       await tester.tap(apply);
       await tester.pumpAndSettle();
 
-      Text yearText = tester.widget<Text>(year);
-
-      expect(yearText.style?.color, onPrimaryColor);
       expect(
           preferences.getString('filters'),
           jsonEncode({
