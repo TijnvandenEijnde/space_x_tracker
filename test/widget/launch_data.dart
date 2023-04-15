@@ -71,6 +71,7 @@ class LaunchData {
   static Launch get successLaunch {
     Map<String, dynamic> modifiedLaunchData = {...launchData};
     modifiedLaunchData['success'] = true;
+    modifiedLaunchData['date_local'] = '2007-03-25T10:30:00+12:00';
     Launch launch = Launch.fromJson(modifiedLaunchData);
 
     return launch;
@@ -83,6 +84,7 @@ class LaunchData {
   static Launch get upcomingLaunch {
     Map<String, dynamic> modifiedLaunchData = {...launchData};
     modifiedLaunchData['upcoming'] = true;
+    modifiedLaunchData['date_local'] = '2008-03-25T10:30:00+12:00';
     modifiedLaunchData['links']['patch'] = {
       'small': null,
       'large': null,
@@ -90,5 +92,21 @@ class LaunchData {
     Launch launch = Launch.fromJson(modifiedLaunchData);
 
     return launch;
+  }
+
+  static List<Launch> get launches {
+    return [
+      failedLaunch,
+      successLaunch,
+      upcomingLaunch
+    ];
+  }
+
+  static List<Map<String, dynamic>> get encodedLaunches {
+    return [
+      failedLaunch.toJson(),
+      successLaunch.toJson(),
+      upcomingLaunch.toJson()
+    ];
   }
 }

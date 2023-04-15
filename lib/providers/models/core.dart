@@ -27,4 +27,5 @@ class Core {
   });
 
   factory Core.fromJson(Map<String, dynamic> json) => _$CoreFromJson(json);
+  Map<String, dynamic> toJson() => _$CoreToJson(this);
 }
