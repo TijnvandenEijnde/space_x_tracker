@@ -8,21 +8,25 @@ import 'package:space_x_tracker/providers/models/launch.dart';
 class LaunchProvider extends ChangeNotifier {
   List<Launch> _launches = [];
   List<Launch> _filteredLaunches = [];
-  bool filtered = false;
+  bool _filtered = false;
 
   List<Launch> get allLaunches {
-    if (filtered == true) {
+    if (_filtered == true) {
       return _filteredLaunches;
     }
 
     return _launches;
   }
 
+  bool get filtered {
+    return _filtered;
+  }
+
   Future<void> sortLaunches(String attribute) async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
 
     final List<Launch> launches =
-        filtered == true ? _filteredLaunches : _launches;
+        _filtered == true ? _filteredLaunches : _launches;
 
     launches.sort((a, b) {
       switch (attribute) {
@@ -66,7 +70,7 @@ class LaunchProvider extends ChangeNotifier {
   }
 
   void reverseLaunches() {
-    if (filtered == true) {
+    if (_filtered == true) {
       _filteredLaunches = _filteredLaunches.reversed.toList();
     } else {
       _launches = _launches.reversed.toList();
@@ -79,11 +83,11 @@ class LaunchProvider extends ChangeNotifier {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
 
     if (filters.isEmpty == true) {
-      filtered = false;
+      _filtered = false;
       preferences.remove('filters');
       notifyListeners();
     } else {
-      filtered = true;
+      _filtered = true;
       _filteredLaunches = _launches.where((element) {
         if ((filters.containsKey('years') && filters['years'] != []) &&
             (filters.containsKey('statuses') && filters['statuses'] != [])) {

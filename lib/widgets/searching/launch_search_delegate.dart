@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
 import 'package:space_x_tracker/widgets/card_list_view.dart';
+import 'package:space_x_tracker/widgets/no_launch_results_message.dart';
+import 'package:space_x_tracker/widgets/searching/no_search_results_message.dart';
 
 class LaunchSearchDelegate extends SearchDelegate {
   final List<Launch> launches;
@@ -28,9 +30,12 @@ class LaunchSearchDelegate extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) =>
       Consumer<LaunchProvider>(builder: (context, launch, child) {
-        return CardViewList(
-          launches: results,
-        );
+        return results.isEmpty == true
+            ? const NoLaunchResultsMessage(
+                subText: 'There are not any launches matching this search.')
+            : CardViewList(
+                launches: results,
+              );
       });
 
   @override
@@ -53,9 +58,11 @@ class LaunchSearchDelegate extends SearchDelegate {
     }).toList();
 
     return Consumer<LaunchProvider>(builder: (context, launch, child) {
-      return CardViewList(
-        launches: results,
-      );
+      return results.isEmpty == true && query != ''
+          ? const NoSearchResultsMessage()
+          : CardViewList(
+              launches: results,
+            );
     });
   }
 }

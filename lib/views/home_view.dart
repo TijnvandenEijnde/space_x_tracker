@@ -6,7 +6,8 @@ import 'package:space_x_tracker/views/filter_view.dart';
 import 'package:space_x_tracker/widgets/card_list_view.dart';
 import 'package:http/http.dart' as http;
 import 'package:space_x_tracker/widgets/flash_message.dart';
-import 'package:space_x_tracker/widgets/launch_search_delegate.dart';
+import 'package:space_x_tracker/widgets/no_launch_results_message.dart';
+import 'package:space_x_tracker/widgets/searching/launch_search_delegate.dart';
 import 'package:space_x_tracker/widgets/sorting/sorting_bottom_sheet.dart';
 
 class HomeView extends StatefulWidget {
@@ -96,7 +97,10 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
       body: launches.isEmpty == true
-          ? const Center(child: CircularProgressIndicator())
+          ? Provider.of<LaunchProvider>(context).filtered == true
+              ? const NoLaunchResultsMessage(
+                  subText: 'There are not any launches matching these filters.')
+              : const Center(child: CircularProgressIndicator())
           : Consumer<LaunchProvider>(builder: (context, launch, child) {
               return CardViewList(
                 launches: launches,
