@@ -43,7 +43,7 @@ class LaunchData {
     'payloads': ['5eb0e4b5b6c3bb0006eeb1e1'],
     'launchpad': '5e9e4502f5090995de566f86',
     'flight_number': 1,
-    'name': 'FalconSat',
+    'name': 'FalconZ',
     'date_utc': '2006-03-24T22:30:00.000Z',
     'date_unix': 1143239400,
     'date_local': '2006-03-25T10:30:00+12:00',
@@ -72,6 +72,8 @@ class LaunchData {
     Map<String, dynamic> modifiedLaunchData = {...launchData};
     modifiedLaunchData['success'] = true;
     modifiedLaunchData['date_local'] = '2007-03-25T10:30:00+12:00';
+    modifiedLaunchData['flight_number'] = 2;
+    modifiedLaunchData['name'] = 'FalconY';
     Launch launch = Launch.fromJson(modifiedLaunchData);
 
     return launch;
@@ -85,6 +87,8 @@ class LaunchData {
     Map<String, dynamic> modifiedLaunchData = {...launchData};
     modifiedLaunchData['upcoming'] = true;
     modifiedLaunchData['date_local'] = '2008-03-25T10:30:00+12:00';
+    modifiedLaunchData['flight_number'] = 3;
+    modifiedLaunchData['name'] = 'FalconX';
     modifiedLaunchData['links']['patch'] = {
       'small': null,
       'large': null,

@@ -9,7 +9,6 @@ import 'package:space_x_tracker/widgets/filters/filter_grid_view.dart';
 import 'package:space_x_tracker/widgets/filters/filter_sub_title.dart';
 
 class FilterView extends StatefulWidget {
-
   static const routeName = '/filter';
 
   const FilterView({
@@ -100,6 +99,12 @@ class _FilterViewState extends State<FilterView> {
     Provider.of<LaunchProvider>(context, listen: false).filterLaunches({});
   }
 
+  void applyFilters() async {
+    await Provider.of<LaunchProvider>(context, listen: false)
+        .filterLaunches(filters)
+        .then((_) => Navigator.of(context).pop());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,9 +133,7 @@ class _FilterViewState extends State<FilterView> {
             ),
           ),
           TextButton(
-            onPressed: () async =>
-                await Provider.of<LaunchProvider>(context, listen: false)
-                    .filterLaunches(filters),
+            onPressed: () => applyFilters(),
             child: Text(
               'Apply',
               style: Theme.of(context)
