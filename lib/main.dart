@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'SpaceX launch tracker',
-          theme: ProjectTheme.lightTheme,
+        theme: ProjectTheme.lightTheme,
         home: HomeView(client: http.Client()),
         routes: {
           FilterView.routeName: (context) => const FilterView(),

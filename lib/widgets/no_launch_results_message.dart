@@ -12,7 +12,8 @@ class NoLaunchResultsMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.30),
+        padding:
+            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.30),
         child: Column(
           children: [
             Icon(

@@ -102,7 +102,7 @@ class LaunchData {
     return [
       failedLaunch,
       successLaunch,
-      upcomingLaunch
+      upcomingLaunch,
     ];
   }
 
