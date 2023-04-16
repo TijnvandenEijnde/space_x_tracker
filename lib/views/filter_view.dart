@@ -10,11 +10,9 @@ import 'package:space_x_tracker/widgets/filters/filter_sub_title.dart';
 import 'package:space_x_tracker/widgets/flash_message.dart';
 
 class FilterView extends StatefulWidget {
-  static const routeName = '/filter';
+  const FilterView({Key? key}) : super(key: key);
 
-  const FilterView({
-    Key? key,
-  }) : super(key: key);
+  static const routeName = '/filter';
 
   @override
   State<FilterView> createState() => _FilterViewState();
@@ -120,8 +118,7 @@ class _FilterViewState extends State<FilterView> {
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color:
-              Theme.of(context).colorScheme.onPrimary, //change your color here
+          color: Theme.of(context).colorScheme.onPrimary,
         ),
         title: Text(
           'Filters',

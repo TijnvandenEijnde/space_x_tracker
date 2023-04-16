@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:space_x_tracker/custom_color_scheme.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
+import 'package:space_x_tracker/views/launch_details_view.dart';
 import 'package:space_x_tracker/widgets/icon_row.dart';
 import 'package:space_x_tracker/widgets/patch.dart';
 import 'package:space_x_tracker/widgets/status_text.dart';
@@ -52,50 +53,53 @@ class LaunchCard extends StatelessWidget {
       'UPCOMING': Theme.of(context).colorScheme.tertiary,
     };
 
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
-        side: BorderSide(
-          color: statusColors[status]!,
-          width: 1.5,
+    return InkWell(
+      onTap: () => Navigator.of(context).pushNamed(LaunchDetailsView.routeName),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
+          side: BorderSide(
+            color: statusColors[status]!,
+            width: 1.5,
+          ),
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.02,
-                right: MediaQuery.of(context).size.width * 0.02,
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width * 0.02,
+                  right: MediaQuery.of(context).size.width * 0.02,
+                ),
+                child: Patch(
+                    key: ValueKey('patch-${launch.id}'),
+                    networkSource: launch.links?.patch?.small),
               ),
-              child: Patch(
-                  key: ValueKey('patch-${launch.id}'),
-                  networkSource: launch.links?.patch?.small),
-            ),
-            SizedBox(width: MediaQuery.of(context).size.width * 0.030),
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.66,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  WidgetRow(
-                      widgets: widgetsRowTwo,
-                      width: MediaQuery.of(context).size.width * 0.70),
-                  WidgetRow(
-                      widgets: widgetsRowOne,
-                      width: MediaQuery.of(context).size.width * 0.70),
-                  IconRow(
-                    icons: icons,
-                    widget: StatusText(
-                      status: status,
-                      color: statusColors[status]!,
+              SizedBox(width: MediaQuery.of(context).size.width * 0.030),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.66,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    WidgetRow(
+                        widgets: widgetsRowTwo,
+                        width: MediaQuery.of(context).size.width * 0.70),
+                    WidgetRow(
+                        widgets: widgetsRowOne,
+                        width: MediaQuery.of(context).size.width * 0.70),
+                    IconRow(
+                      icons: icons,
+                      widget: StatusText(
+                        status: status,
+                        color: statusColors[status]!,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            )
-          ],
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
