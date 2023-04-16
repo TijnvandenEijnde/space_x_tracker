@@ -43,11 +43,9 @@ void main() {
     (_) async => http.Response(jsonEncode(launches), 200),
   );
 
-  setUpAll(() {
-    // Prevents NetworkImage failures the solution with network_image_mock is not working in this case.
-    HttpOverrides.global = null;
-    SharedPreferences.setMockInitialValues({});
-  });
+  // Prevents NetworkImage failures the solution with network_image_mock is not working in this case.
+  setUpAll(() => HttpOverrides.global = null);
+  setUp(() => SharedPreferences.setMockInitialValues({}));
 
   group('cards', () {
     testWidgets('it does show a list of launch cards',
@@ -114,7 +112,6 @@ void main() {
 
   group('filtering', () {
     testWidgets('it can filter the list', (WidgetTester tester) async {
-      SharedPreferences.setMockInitialValues({});
       final SharedPreferences preferences =
           await SharedPreferences.getInstance();
 
