@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:space_x_tracker/custom_color_scheme.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
+import 'package:space_x_tracker/providers/models/launch_details_arguments.dart';
 import 'package:space_x_tracker/views/launch_details_view.dart';
 import 'package:space_x_tracker/widgets/icon_row.dart';
 import 'package:space_x_tracker/widgets/patch.dart';
@@ -54,7 +55,7 @@ class LaunchCard extends StatelessWidget {
     };
 
     return InkWell(
-      onTap: () => Navigator.of(context).pushNamed(LaunchDetailsView.routeName),
+      onTap: () => Navigator.of(context).pushNamed(LaunchDetailsView.routeName, arguments: LaunchDetailsArguments(launch.rocket!)),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),

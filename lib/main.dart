@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:space_x_tracker/project_theme.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
+import 'package:space_x_tracker/providers/rocket_provider.dart';
 import 'package:space_x_tracker/views/filter_view.dart';
 import 'package:space_x_tracker/views/home_view.dart';
 import 'package:space_x_tracker/views/launch_details_view.dart';
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => LaunchProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RocketProvider(),
         )
       ],
       child: MaterialApp(
@@ -29,7 +33,7 @@ class MyApp extends StatelessWidget {
         home: HomeView(client: http.Client()),
         routes: {
           FilterView.routeName: (context) => const FilterView(),
-          LaunchDetailsView.routeName: (context) => const LaunchDetailsView(),
+          LaunchDetailsView.routeName: (context) => LaunchDetailsView(client: http.Client()),
         },
       ),
     );
