@@ -110,12 +110,33 @@ class LaunchProvider extends ChangeNotifier {
   }
 
   Future<void> fetchLaunches(http.Client client) async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
     final url = Uri.parse('https://api.spacexdata.com/v5/launches');
 
     try {
       final response = await client.get(url);
       final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
       _launches = parsed.map<Launch>((json) => Launch.fromJson(json)).toList();
+
+      if (preferences.getString('sort') != null) {
+        sortLaunches(preferences.getString('sort')!);
+      }
+
+      if (preferences.getString('filters') != null) {
+        Map<String, List<String>> filters = {};
+        final sharedFilters = jsonDecode(preferences.getString('filters')!);
+
+        for (var key in sharedFilters.keys) {
+          for (var value in sharedFilters[key]) {
+            if (filters[key] == null) {
+              filters[key] = [];
+            }
+            filters[key]?.add(value);
+          }
+        }
+
+        filterLaunches(filters);
+      }
 
       notifyListeners();
     } catch (_) {
