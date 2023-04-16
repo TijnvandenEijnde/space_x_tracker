@@ -59,7 +59,7 @@ class _SortingBottomSheetState extends State<SortingBottomSheet> {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: SizedBox(
-        height: 200,
+        height: MediaQuery.of(context).size.height * 0.30,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -76,11 +76,13 @@ class _SortingBottomSheetState extends State<SortingBottomSheet> {
                 endIndent: MediaQuery.of(context).size.width * 0.30),
             ...sortingAttributes.entries
                 .map(
-                  (attribute) => SortingBottomSheetItem(
-                    sort: attribute.key,
-                    text: attribute.value,
-                    enabled: enabledItems[attribute.key] ?? false,
-                    toggleSort: toggleSort,
+                  (attribute) => Expanded(
+                    child: SortingBottomSheetItem(
+                      sort: attribute.key,
+                      text: attribute.value,
+                      enabled: enabledItems[attribute.key] ?? false,
+                      toggleSort: toggleSort,
+                    ),
                   ),
                 )
                 .toList()

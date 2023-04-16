@@ -30,7 +30,7 @@ class _SortingBottomSheetItemState extends State<SortingBottomSheetItem> {
             ? Theme.of(context).colorScheme.tertiary
             : Colors.transparent,
         alignment: Alignment.centerLeft,
-        height: 40,
+        height: MediaQuery.of(context).size.height * 0.05,
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
