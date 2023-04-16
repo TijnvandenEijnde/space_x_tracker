@@ -7,6 +7,7 @@ import 'package:space_x_tracker/widgets/filters/filter_types.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/widgets/filters/filter_grid_view.dart';
 import 'package:space_x_tracker/widgets/filters/filter_sub_title.dart';
+import 'package:space_x_tracker/widgets/flash_message.dart';
 
 class FilterView extends StatefulWidget {
   static const routeName = '/filter';
@@ -91,18 +92,26 @@ class _FilterViewState extends State<FilterView> {
   }
 
   void discardFilters() {
-    setState(() {
-      enabledItems.clear();
-      filters.clear();
-    });
-
-    Provider.of<LaunchProvider>(context, listen: false).filterLaunches({});
+    Provider.of<LaunchProvider>(context, listen: false)
+        .filterLaunches({})
+        .then(
+          (_) => setState(() {
+            enabledItems.clear();
+            filters.clear();
+          }),
+        )
+        .catchError(
+          (_) => FlashMessage.show(
+              context: context, message: 'Unable to discard filters'),
+        );
   }
 
   void applyFilters() async {
     await Provider.of<LaunchProvider>(context, listen: false)
         .filterLaunches(filters)
-        .then((_) => Navigator.of(context).pop());
+        .then((_) => Navigator.of(context).pop())
+        .catchError((_) => FlashMessage.show(
+            context: context, message: 'Unable to apply filters'));
   }
 
   @override

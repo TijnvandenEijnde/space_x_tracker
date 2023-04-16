@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:space_x_tracker/widgets/flash_message.dart';
 import 'package:space_x_tracker/widgets/sorting/sorting_bottom_sheet_item.dart';
 
 import '../../providers/launch_provider.dart';
@@ -43,7 +44,9 @@ class _SortingBottomSheetState extends State<SortingBottomSheet> {
   void toggleSort(String sort) async {
     await Provider.of<LaunchProvider>(context, listen: false)
         .sortLaunches(sort)
-        .then((_) => setEnabledItems(sort));
+        .then((_) => setEnabledItems(sort))
+        .catchError((_) => FlashMessage.show(
+            context: context, message: 'Unable to sort data'));
   }
 
   void setEnabledItems(String sort) {
@@ -64,28 +67,22 @@ class _SortingBottomSheetState extends State<SortingBottomSheet> {
             Center(
               child: Text(
                 'Sort by',
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(
-                    color: Theme
-                        .of(context)
-                        .colorScheme
-                        .onBackground),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground),
               ),
             ),
-            Divider(indent: MediaQuery.of(context).size.width * 0.30, endIndent: MediaQuery.of(context).size.width * 0.30),
+            Divider(
+                indent: MediaQuery.of(context).size.width * 0.30,
+                endIndent: MediaQuery.of(context).size.width * 0.30),
             ...sortingAttributes.entries
                 .map(
-                  (attribute) =>
-                  SortingBottomSheetItem(
+                  (attribute) => SortingBottomSheetItem(
                     sort: attribute.key,
                     text: attribute.value,
                     enabled: enabledItems[attribute.key] ?? false,
                     toggleSort: toggleSort,
                   ),
-            )
+                )
                 .toList()
           ],
         ),
