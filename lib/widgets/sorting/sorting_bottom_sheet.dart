@@ -56,7 +56,7 @@ class _SortingBottomSheetState extends State<SortingBottomSheet> {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.24225,
+        height: 200,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -75,7 +75,7 @@ class _SortingBottomSheetState extends State<SortingBottomSheet> {
                         .onBackground),
               ),
             ),
-            Divider(indent: MediaQuery.of(context).size.width * 0.25, endIndent: MediaQuery.of(context).size.width * 0.25),
+            Divider(indent: MediaQuery.of(context).size.width * 0.30, endIndent: MediaQuery.of(context).size.width * 0.30),
             ...sortingAttributes.entries
                 .map(
                   (attribute) =>

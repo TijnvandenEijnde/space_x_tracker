@@ -40,14 +40,18 @@ void main() {
 
   when(client.get(Uri.parse('https://api.spacexdata.com/v5/launches')))
       .thenAnswer(
-        (_) async => http.Response(jsonEncode(launches), 200),
+    (_) async => http.Response(jsonEncode(launches), 200),
   );
 
-  // Prevents NetworkImage failures the solution with network_image_mock is not working in this case.
-  setUpAll(() => HttpOverrides.global = null);
+  setUpAll(() {
+    // Prevents NetworkImage failures the solution with network_image_mock is not working in this case.
+    HttpOverrides.global = null;
+    SharedPreferences.setMockInitialValues({});
+  });
 
   group('cards', () {
-    testWidgets('it does show a list of launch cards', (WidgetTester tester) async {
+    testWidgets('it does show a list of launch cards',
+        (WidgetTester tester) async {
       await createWidgetUnderTest(tester);
       await tester.pumpAndSettle();
 
@@ -58,7 +62,8 @@ void main() {
   });
 
   group('ordering', () {
-    testWidgets('it can reverse the order of the list', (WidgetTester tester) async {
+    testWidgets('it can reverse the order of the list',
+        (WidgetTester tester) async {
       await createWidgetUnderTest(tester);
       await tester.pumpAndSettle();
 
@@ -93,9 +98,9 @@ void main() {
 
       await tester.tap(sortButton);
       await tester.pumpAndSettle();
-      
+
       Finder sortByName = find.text('Name');
-      
+
       await tester.tap(sortByName);
       await tester.tapAt(const Offset(20.0, 20.0));
       await tester.pumpAndSettle();
@@ -111,7 +116,7 @@ void main() {
     testWidgets('it can filter the list', (WidgetTester tester) async {
       SharedPreferences.setMockInitialValues({});
       final SharedPreferences preferences =
-      await SharedPreferences.getInstance();
+          await SharedPreferences.getInstance();
 
       await createWidgetUnderTest(tester);
       await tester.pumpAndSettle();
