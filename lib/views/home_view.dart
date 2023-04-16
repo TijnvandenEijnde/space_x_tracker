@@ -99,7 +99,7 @@ class _HomeViewState extends State<HomeView> {
       body: launches.isEmpty == true
           ? Provider.of<LaunchProvider>(context).filtered == true
               ? const NoLaunchResultsMessage(
-                  subText: 'There are not any launches matching these filters.')
+                  subText: 'There are no launches matching these filters.')
               : const Center(child: CircularProgressIndicator())
           : Consumer<LaunchProvider>(builder: (context, launch, child) {
               return CardViewList(

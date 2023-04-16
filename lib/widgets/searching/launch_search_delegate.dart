@@ -32,7 +32,7 @@ class LaunchSearchDelegate extends SearchDelegate {
       Consumer<LaunchProvider>(builder: (context, launch, child) {
         return results.isEmpty == true
             ? const NoLaunchResultsMessage(
-                subText: 'There are not any launches matching this search.')
+                subText: 'There are no launches matching this search.')
             : CardViewList(
                 launches: results,
               );
