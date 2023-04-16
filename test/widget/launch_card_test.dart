@@ -1,7 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
-import 'package:network_image_mock/network_image_mock.dart';
+import 'package:space_x_tracker/project_theme.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
 import 'package:space_x_tracker/widgets/icon_row_item.dart';
 import 'package:space_x_tracker/widgets/launch_card.dart';
@@ -10,14 +12,19 @@ import 'launch_data.dart';
 
 void main() {
   final Launch launch = LaunchData.failedLaunch;
-  const Color errorColor = Color(0xffd32f2f);
+  const Color errorColor = Color(0xffb00020);
   const Color successColor = Color(0xFF39DC03);
-  const Color primaryColor = MaterialColor(0xff2196f3, {});
+  const Color tertiaryColor = Color(0xfffb8122);
 
   Future<void> createWidgetUnderTest(WidgetTester tester, Launch launch) async {
-    Widget widgetUnderTest = MaterialApp(home: LaunchCard(launch: launch));
-    await mockNetworkImagesFor(() => tester.pumpWidget(widgetUnderTest));
+    Widget widgetUnderTest = MaterialApp(
+      home: LaunchCard(launch: launch),
+      theme: ProjectTheme.lightTheme,
+    );
+    await tester.pumpWidget(widgetUnderTest);
   }
+
+  setUpAll(() => HttpOverrides.global = null);
 
   group('display', () {
     testWidgets('it displays the correct data on the card',
@@ -48,12 +55,16 @@ void main() {
       expect(crew.icon, Icons.person);
     });
 
-    testWidgets('it displays a text widget with a rocket when patch data is null',
+    testWidgets(
+        'it displays a text widget with a rocket when patch data is null',
         (WidgetTester tester) async {
       await createWidgetUnderTest(tester, LaunchData.upcomingLaunch);
 
-      Finder image = find.byWidgetPredicate((Widget widget) =>
-      widget is Image && widget.key == ValueKey('patch-${LaunchData.upcomingLaunch.id}'));
+      Finder image = find.byWidgetPredicate(
+        (Widget widget) =>
+            widget is Image &&
+            widget.key == ValueKey('patch-${LaunchData.upcomingLaunch.id}'),
+      );
       Finder rocket = find.text('🚀');
       Text rocketTextWidget = tester.widget(rocket);
 
@@ -107,7 +118,7 @@ void main() {
     });
 
     testWidgets(
-        'it should change the status to upcoming and the color to the primary color when upcoming data is true',
+        'it should change the status to upcoming and the color to the tertiary color when upcoming data is true',
         (WidgetTester tester) async {
       await createWidgetUnderTest(tester, LaunchData.upcomingLaunch);
 
@@ -122,9 +133,9 @@ void main() {
       final borderColor = side.color;
 
       expect(status, findsOneWidget);
-      expect(statusTextWidget.style?.color?.value, primaryColor.value);
+      expect(statusTextWidget.style?.color, tertiaryColor);
       expect(card, findsOneWidget);
-      expect(borderColor.value, primaryColor.value);
+      expect(borderColor, tertiaryColor);
     });
   });
 }

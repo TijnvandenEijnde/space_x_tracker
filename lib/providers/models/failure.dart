@@ -14,5 +14,7 @@ class Failure {
     required this.reason,
   });
 
-  factory Failure.fromJson(Map<String, dynamic> json) => _$FailureFromJson(json);
+  factory Failure.fromJson(Map<String, dynamic> json) =>
+      _$FailureFromJson(json);
+  Map<String, dynamic> toJson() => _$FailureToJson(this);
 }

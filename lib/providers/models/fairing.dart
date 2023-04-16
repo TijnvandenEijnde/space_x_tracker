@@ -16,5 +16,7 @@ class Fairing {
     required this.ships,
   });
 
-  factory Fairing.fromJson(Map<String, dynamic> json) => _$FairingFromJson(json);
+  factory Fairing.fromJson(Map<String, dynamic> json) =>
+      _$FairingFromJson(json);
+  Map<String, dynamic> toJson() => _$FairingToJson(this);
 }

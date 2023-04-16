@@ -9,6 +9,7 @@ part 'launch.g.dart';
 
 @JsonSerializable()
 class Launch {
+  // @todo add getters for all the values that are used, in the future the data that is not needed can be removed.
   final bool? autoUpdate;
   final List<String>? capsules;
   final List<Core>? cores;
@@ -67,5 +68,14 @@ class Launch {
     required this.window,
   });
 
+  String get status {
+    return success == null || success == false
+        ? upcoming == true
+            ? 'UPCOMING'
+            : 'FAILED'
+        : 'SUCCESS';
+  }
+
   factory Launch.fromJson(Map<String, dynamic> json) => _$LaunchFromJson(json);
+  Map<String, dynamic> toJson() => _$LaunchToJson(this);
 }
