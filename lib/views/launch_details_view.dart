@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
+import 'package:space_x_tracker/custom_color_scheme.dart';
 import 'package:space_x_tracker/providers/models/launch_details_arguments.dart';
 import 'package:space_x_tracker/providers/models/rocket.dart';
 import 'package:space_x_tracker/providers/rocket_provider.dart';
@@ -30,7 +31,7 @@ class _LaunchDetailsViewState extends State<LaunchDetailsView> {
     "mass": "Mass",
     "stages": "Stages",
     "boosters": "Boosters",
-    "successRatePercentage": "Success",
+    "payloads": "Payloads",
   };
 
   Future<void> _getRocket() async {
@@ -40,9 +41,9 @@ class _LaunchDetailsViewState extends State<LaunchDetailsView> {
     await Provider.of<RocketProvider>(context, listen: false)
         .fetchRocket(widget.client, arguments.rocketId)
         .then((rocket) => setState(() {
-          _rocket = rocket;
-          _rocketMeasurements = rocket.rocketMeasurements;
-    }));
+              _rocket = rocket;
+              _rocketMeasurements = rocket.rocketMeasurements;
+            }));
   }
 
   @override
@@ -55,127 +56,178 @@ class _LaunchDetailsViewState extends State<LaunchDetailsView> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    Map<IconData, Color> statusColors = {
+      Icons.cancel: colorScheme.error,
+      Icons.check_circle: colorScheme.success,
+      Icons.help: colorScheme.tertiary,
+    };
 
     return Scaffold(
-      // backgroundColor: Theme.of(context).colorScheme.background,
-      backgroundColor: colorScheme.tertiary,
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: colorScheme.onPrimary,
-        ),
-        title: Text(
-          'Launch details',
-          style: TextStyle(
-            color: colorScheme.onPrimary,
-          ),
-        ),
-        backgroundColor: colorScheme.primary,
-      ),
+      backgroundColor: colorScheme.background,
       body: _rocket == null
           ? const Center(child: CircularProgressIndicator())
           : SingleChildScrollView(
-              child: Stack(
+              child: Column(
                 children: [
-                  Image.network(_rocket!.flickrImages!.first),
-                  Container(
-                    margin: EdgeInsets.only(top: size.height * 0.28),
-                    height: size.height * 0.72,
-                    decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(25)),
-                        color: colorScheme.onPrimary),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.all(30),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              _rocket?.name ?? 'Unnamed rocket',
-                              style: Theme.of(context).textTheme.headlineLarge,
+                  SizedBox(
+                    height: size.height * 0.4,
+                    child: Stack(
+                      children: [
+                        Container(
+                          height: size.height * 0.4 - 50,
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.only(
+                              bottomLeft: Radius.circular(50),
                             ),
-                            SizedBox(
-                              height: 10,
+                            image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(_rocket!.flickrImages!.first),
                             ),
-                            Text(
-                              _rocket?.description ?? 'No description',
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            SizedBox(
-                              height: 25,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            width: size.width * 0.9,
+                            height: 80,
+                            decoration: BoxDecoration(
+                                color: colorScheme.background,
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(50),
+                                  bottomLeft: Radius.circular(50),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                      offset: const Offset(0, 5),
+                                      blurRadius: 75,
+                                      color:
+                                          colorScheme.shadow.withOpacity(0.2))
+                                ]),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Text(
-                                      _rocket?.launchPrice ?? 'Unknown',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineMedium,
-                                    ),
-                                    Text('Price per launch',
+                                    Icon(
+                                      _rocket?.status ?? Icons.help,
+                                      size: 27,
+                                      color: statusColors[_rocket?.status] ?? colorScheme.tertiary,
+                                    ), //check_circle
+                                    Text(_rocket?.statusText ?? 'Unknown',
                                         style: Theme.of(context)
                                             .textTheme
                                             .labelLarge),
                                   ],
                                 ),
-                                Text(
-                                  'Inactive',
-                                  style:
-                                      Theme.of(context).textTheme.headlineSmall,
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '${_rocket?.successRatePct.toString()}%' ??
+                                          'Unknown',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
+                                    ),
+                                    Text('Success rate',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      _rocket?.launchPrice ?? 'Unknown',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleLarge,
+                                    ),
+                                    Text('Launch cost',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge),
+                                  ],
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: 30,
-                            ),
-                            GridView.builder(
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3,
-                                crossAxisSpacing: 20,
-                                childAspectRatio: 1.5,
-                                mainAxisSpacing: 20,
-                              ),
-                              shrinkWrap: true,
-                              itemCount: detailsText.length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    // horizontal: 10,
-                                    vertical: 5,
-                                  ),
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .surfaceVariant,
-                                          width: 1.5),
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Column(
-                                    children: [
-                                      Text(detailsText.values.elementAt(index),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium),
-                                      Text(_rocketMeasurements![detailsText.keys.elementAt(index)],
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .titleMedium),
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
+                          ),
                         ),
+                        SafeArea(
+                            child: BackButton(
+                          color: colorScheme.background,
+                        ))
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Padding(
+                      padding: const EdgeInsets.all(30),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _rocket?.name ?? 'Unnamed rocket',
+                            style: Theme.of(context).textTheme.headlineLarge,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            _rocket?.description ?? 'No description',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 20,
+                              childAspectRatio: 1.5,
+                              mainAxisSpacing: 20,
+                            ),
+                            shrinkWrap: true,
+                            itemCount: detailsText.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                padding: const EdgeInsets.symmetric(
+                                  // horizontal: 10,
+                                  vertical: 5,
+                                ),
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .surfaceVariant,
+                                        width: 1.5),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Column(
+                                  // crossAxisAlignment:
+                                  // CrossAxisAlignment.start,
+                                  children: [
+                                    Text(detailsText.values.elementAt(index),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium),
+                                    Text(
+                                        _rocketMeasurements![
+                                            detailsText.keys.elementAt(index)],
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

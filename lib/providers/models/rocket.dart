@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:space_x_tracker/providers/models/length.dart';
@@ -18,6 +19,7 @@ class Rocket {
   final Length? height;
   final Mass? mass;
   final String? name;
+  final List<Object>? payloadWeights;
   final int? stages;
   final int? successRatePct;
 
@@ -33,24 +35,35 @@ class Rocket {
     required this.height,
     required this.mass,
     required this.name,
+    required this.payloadWeights,
     required this.stages,
     required this.successRatePct,
   });
 
   Map<String, dynamic> get rocketMeasurements {
     return {
-      "height": height?.meters == null ? 'Unknown' : '${height?.meters} m',
-      "diameter": diameter?.meters == null ? 'Unkown' : '${diameter?.meters} m',
-      "mass": mass?.kg == null ? 'Unknown' : '${mass?.kg} kg',
+      "height": height?.meters == null ? 'Unknown' : '${height?.meters}m',
+      "diameter": diameter?.meters == null ? 'Unkown' : '${diameter?.meters}m',
+      "mass": '${NumberFormat.decimalPattern('de_DE').format(mass?.kg)}kg',
       "stages": '$stages',
       "boosters": '$boosters',
-      "successRatePercentage": '$successRatePct%',
+      "payloads": '${payloadWeights?.length ?? 0}',
     };
- }
+  }
 
- String get launchPrice {
-    return NumberFormat.compactCurrency(locale: 'en_US', symbol: '\$').format(costPerLaunch).toString();
- }
+  String get launchPrice {
+    return NumberFormat.compactCurrency(locale: 'en_US', symbol: '\$')
+        .format(costPerLaunch)
+        .toString();
+  }
+
+  IconData get status {
+    return active == null ? Icons.help : (active == true  ? Icons.check_circle : Icons.cancel);
+  }
+
+  String get statusText {
+    return active == null ? 'Unknown' : (active == true  ? 'Active' : 'Inactive');
+  }
 
   factory Rocket.fromJson(Map<String, dynamic> json) => _$RocketFromJson(json);
 
