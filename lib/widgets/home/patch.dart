@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class Patch extends StatelessWidget {
@@ -16,15 +17,20 @@ class Patch extends StatelessWidget {
       width: size.width * 0.175,
       height: size.height * 0.09,
       child: networkSource == null
-          ? const Text(
-              '🚀',
-              style: TextStyle(fontSize: 50),
+          ? Image.asset(
+              'assets/placeholders/rocket-placeholder-small.png',
             )
-          : Image.network(
-              networkSource!,
-              key: key,
-              scale: 4.5,
+          : CachedNetworkImage(
+              imageUrl: networkSource!,
               fit: BoxFit.contain,
+              placeholder: (context, url) => const Center(
+                child: SizedBox(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+              errorWidget: (context, url, error) => Image.asset(
+                'assets/placeholders/rocket-placeholder-small.png',
+              ),
             ),
     );
   }

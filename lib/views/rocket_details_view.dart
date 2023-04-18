@@ -1,11 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:space_x_tracker/providers/models/launch_details_arguments.dart';
 import 'package:space_x_tracker/providers/models/rocket.dart';
 import 'package:space_x_tracker/providers/rocket_provider.dart';
+import 'package:space_x_tracker/widgets/rocket/rocket_cover_image.dart';
 import 'package:space_x_tracker/widgets/rocket/rocket_details_grid.dart';
 import 'package:space_x_tracker/widgets/rocket/rocket_information_bar.dart';
+
+import '../widgets/flash_message.dart';
 
 class RocketDetailsView extends StatefulWidget {
   final http.Client client;
@@ -34,11 +38,17 @@ class _RocketDetailsViewState extends State<RocketDetailsView> {
         .then((rocket) => setState(() {
               _rocket = rocket;
               _rocketDetails = rocket.rocketDetails;
-            }));
-    // .catchError(
-    //   (_) => FlashMessage.show(
-    //       context: context, message: 'Unable to retrieve rocket'),
-    // );
+            }))
+        .catchError(
+      (_) {
+        FlashMessage.show(
+          context: context,
+          message: 'Unable to retrieve rocket',
+        );
+
+        Navigator.of(context).pop();
+      },
+    );
   }
 
   @override
@@ -63,22 +73,11 @@ class _RocketDetailsViewState extends State<RocketDetailsView> {
                     height: size.height * 0.4,
                     child: Stack(
                       children: [
-                        Container(
-                          height: size.height * 0.4 - 50,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
-                              bottomLeft: Radius.circular(50),
-                            ),
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(_rocket!.flickrImages!.first),
-                            ),
-                          ),
-                        ),
+                        RocketCoverImage(imageUrl: _rocket?.flickrImages?.first),
                         RocketInformationBar(rocket: _rocket),
                         SafeArea(
                             child: BackButton(
-                          color: colorScheme.background,
+                          color: colorScheme.onBackground,
                         ))
                       ],
                     ),
