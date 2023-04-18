@@ -13,13 +13,21 @@ class CardViewList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    final Orientation orientation = MediaQuery.of(context).orientation;
+
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: orientation == Orientation.portrait ? 1 : 2,
+        crossAxisSpacing: 0,
+        childAspectRatio: orientation == Orientation.portrait ? 4 : 4,
+        mainAxisSpacing: 0,
+      ),
       itemCount: launches.length,
+      shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: LaunchCard(launch: launches[index]),
       ),
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
     );
   }
 }

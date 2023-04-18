@@ -20,6 +20,7 @@ class LaunchCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Orientation orientation = MediaQuery.of(context).orientation;
     final Size size = MediaQuery.of(context).size;
     final String status = launch.status;
     final Map<IconData, String> icons = {
@@ -43,7 +44,7 @@ class LaunchCard extends StatelessWidget {
     ];
     final List<SizedBox> widgetsRowTwo = [
       SizedBox(
-        width: size.width * 0.60,
+        width: orientation == Orientation.portrait ? size.width * 0.60 : size.width * 0.25,
         child: Text(
           launch.name == null ? 'Unnamed' : launch.name!,
           style: const TextStyle(overflow: TextOverflow.ellipsis),
@@ -83,11 +84,10 @@ class LaunchCard extends StatelessWidget {
                   networkSource: launch.links?.patch?.small,
                 ),
               ),
-              SizedBox(width: size.width * 0.030),
-              SizedBox(
-                width: size.width * 0.66,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              orientation == Orientation.portrait ? SizedBox(width: size.width * 0.030) : const SizedBox.shrink(),
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     WidgetRow(
                       widgets: widgetsRowTwo,
@@ -106,7 +106,6 @@ class LaunchCard extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
             ],
           ),
         ),
