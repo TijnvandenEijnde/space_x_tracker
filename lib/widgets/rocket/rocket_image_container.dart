@@ -14,7 +14,8 @@ class RocketImageContainer extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
 
     return Container(
-      height: size.height * (orientation == Orientation.portrait ? 0.4 : 1.5) - 50,
+      height:
+          size.height * (orientation == Orientation.portrait ? 0.4 : 1.5) - 50,
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(50),

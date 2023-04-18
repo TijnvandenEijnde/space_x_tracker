@@ -58,11 +58,12 @@ class RocketInformationBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  rocket?.successRatePct == null ? 'Unknown' : '${rocket?.successRatePct}%',
+                  rocket?.successRatePct == null
+                      ? 'Unknown'
+                      : '${rocket?.successRatePct}%',
                   style: textTheme.titleLarge,
                 ),
-                Text('Success rate',
-                    style: textTheme.labelLarge),
+                Text('Success rate', style: textTheme.labelLarge),
               ],
             ),
             Column(
@@ -72,8 +73,7 @@ class RocketInformationBar extends StatelessWidget {
                   rocket?.launchPrice ?? 'Unknown',
                   style: textTheme.titleLarge,
                 ),
-                Text('Launch cost',
-                    style: textTheme.labelLarge),
+                Text('Launch cost', style: textTheme.labelLarge),
               ],
             ),
           ],

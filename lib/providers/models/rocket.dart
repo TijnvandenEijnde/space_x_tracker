@@ -58,11 +58,15 @@ class Rocket {
   }
 
   IconData get status {
-    return active == null ? Icons.help : (active == true  ? Icons.check_circle : Icons.cancel);
+    return active == null
+        ? Icons.help
+        : (active == true ? Icons.check_circle : Icons.cancel);
   }
 
   String get statusText {
-    return active == null ? 'Unknown' : (active == true  ? 'ACTIVE' : 'INACTIVE');
+    return active == null
+        ? 'Unknown'
+        : (active == true ? 'ACTIVE' : 'INACTIVE');
   }
 
   factory Rocket.fromJson(Map<String, dynamic> json) => _$RocketFromJson(json);

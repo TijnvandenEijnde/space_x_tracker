@@ -15,7 +15,8 @@ class IconRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final Orientation orientation = MediaQuery.of(context).orientation;
-    final double padding = orientation == Orientation.portrait ? size.width * 0.025 : 7.5;
+    final double padding =
+        orientation == Orientation.portrait ? size.width * 0.025 : 7.5;
 
     List<Widget> iconList = icons.entries.map((icon) {
       return Padding(

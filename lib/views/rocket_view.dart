@@ -70,10 +70,12 @@ class _RocketViewState extends State<RocketView> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: size.height * (orientation == Orientation.portrait ? 0.4 : 1.5),
+                    height: size.height *
+                        (orientation == Orientation.portrait ? 0.4 : 1.5),
                     child: Stack(
                       children: [
-                        RocketCoverImage(imageUrl: _rocket?.flickrImages?.first),
+                        RocketCoverImage(
+                            imageUrl: _rocket?.flickrImages?.first),
                         RocketInformationBar(rocket: _rocket),
                         SafeArea(
                             child: BackButton(

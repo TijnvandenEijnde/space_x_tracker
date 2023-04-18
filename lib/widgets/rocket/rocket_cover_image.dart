@@ -26,7 +26,9 @@ class RocketCoverImage extends StatelessWidget {
             imageBuilder: (context, imageProvider) =>
                 RocketImageContainer(imageProvider: imageProvider),
             placeholder: (context, url) => SizedBox(
-              height: size.height * (orientation == Orientation.portrait ? 0.4 : 1.5) - 50,
+              height: size.height *
+                      (orientation == Orientation.portrait ? 0.4 : 1.5) -
+                  50,
               child: const Center(
                 child: CircularProgressIndicator(),
               ),

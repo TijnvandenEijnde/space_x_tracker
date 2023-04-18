@@ -19,7 +19,6 @@ class SortingBottomSheetItem extends StatefulWidget {
 }
 
 class _SortingBottomSheetItemState extends State<SortingBottomSheetItem> {
-
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
@@ -29,9 +28,8 @@ class _SortingBottomSheetItemState extends State<SortingBottomSheetItem> {
       highlightColor: colorScheme.tertiary,
       splashColor: colorScheme.tertiary,
       child: Container(
-        color: widget.enabled == true
-            ? colorScheme.tertiary
-            : Colors.transparent,
+        color:
+            widget.enabled == true ? colorScheme.tertiary : Colors.transparent,
         alignment: Alignment.centerLeft,
         width: double.infinity,
         child: Padding(

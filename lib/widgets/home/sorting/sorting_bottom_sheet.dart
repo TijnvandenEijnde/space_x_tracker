@@ -62,7 +62,9 @@ class _SortingBottomSheetState extends State<SortingBottomSheet> {
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: SizedBox(
-        height: orientation == Orientation.portrait ? size.height * 0.30 : size.height * 0.60,
+        height: orientation == Orientation.portrait
+            ? size.height * 0.30
+            : size.height * 0.60,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
