@@ -4,8 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:space_x_tracker/providers/models/launch_details_arguments.dart';
 import 'package:space_x_tracker/providers/models/rocket.dart';
 import 'package:space_x_tracker/providers/rocket_provider.dart';
-
-import '../widgets/flash_message.dart';
 import 'package:space_x_tracker/widgets/rocket/rocket_details_grid.dart';
 import 'package:space_x_tracker/widgets/rocket/rocket_information_bar.dart';
 
@@ -86,7 +84,9 @@ class _RocketDetailsViewState extends State<RocketDetailsView> {
                     ),
                   ),
                   RocketDetailsGrid(
-                      rocket: _rocket, rocketDetails: _rocketDetails),
+                    rocket: _rocket,
+                    rocketDetails: _rocketDetails,
+                  ),
                 ],
               ),
             ),

@@ -19,15 +19,18 @@ class SortingBottomSheetItem extends StatefulWidget {
 }
 
 class _SortingBottomSheetItemState extends State<SortingBottomSheetItem> {
+
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return InkWell(
       onTap: () => widget.toggleSort(widget.sort),
-      highlightColor: Theme.of(context).colorScheme.tertiary,
-      splashColor: Theme.of(context).colorScheme.tertiary,
+      highlightColor: colorScheme.tertiary,
+      splashColor: colorScheme.tertiary,
       child: Container(
         color: widget.enabled == true
-            ? Theme.of(context).colorScheme.tertiary
+            ? colorScheme.tertiary
             : Colors.transparent,
         alignment: Alignment.centerLeft,
         height: MediaQuery.of(context).size.height * 0.05,
@@ -39,8 +42,8 @@ class _SortingBottomSheetItemState extends State<SortingBottomSheetItem> {
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.normal,
                 color: widget.enabled == true
-                    ? Theme.of(context).colorScheme.background
-                    : Theme.of(context).colorScheme.onBackground),
+                    ? colorScheme.background
+                    : colorScheme.onBackground),
           ),
         ),
       ),

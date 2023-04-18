@@ -13,6 +13,7 @@ class RocketDetailsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
     final Map<String, String> detailsText = {
       'height': 'Height',
       'diameter': 'Diameter',
@@ -32,14 +33,14 @@ class RocketDetailsGrid extends StatelessWidget {
           children: [
             Text(
               rocket?.name ?? 'Unnamed rocket',
-              style: Theme.of(context).textTheme.headlineLarge,
+              style: textTheme.headlineLarge,
             ),
             const SizedBox(
               height: 10,
             ),
             Text(
               rocket?.description ?? 'No description',
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: textTheme.bodyMedium,
             ),
             GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -65,12 +66,15 @@ class RocketDetailsGrid extends StatelessWidget {
                     // crossAxisAlignment:
                     // CrossAxisAlignment.start,
                     children: [
-                      Text(detailsText.values.elementAt(index),
-                          style: Theme.of(context).textTheme.bodyMedium),
                       Text(
-                          rocket?.rocketDetails[
-                              detailsText.keys.elementAt(index)],
-                          style: Theme.of(context).textTheme.titleMedium),
+                        detailsText.values.elementAt(index),
+                        style: textTheme.bodyMedium,
+                      ),
+                      Text(
+                        rocket
+                            ?.rocketDetails[detailsText.keys.elementAt(index)],
+                        style: textTheme.titleMedium,
+                      ),
                     ],
                   ),
                 );

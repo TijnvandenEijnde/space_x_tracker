@@ -10,9 +10,11 @@ class Patch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.175,
-      height: MediaQuery.of(context).size.height * 0.09,
+      width: size.width * 0.175,
+      height: size.height * 0.09,
       child: networkSource == null
           ? const Text(
               '🚀',

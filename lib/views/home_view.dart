@@ -44,6 +44,7 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     launches = Provider.of<LaunchProvider>(context, listen: true).allLaunches;
 
     return Scaffold(
@@ -51,15 +52,15 @@ class _HomeViewState extends State<HomeView> {
         title: Text(
           'Launches',
           style: TextStyle(
-            color: Theme.of(context).colorScheme.background,
+            color: colorScheme.background,
           ),
         ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
+        backgroundColor: colorScheme.primary,
         actions: [
           IconButton(
               icon: Icon(
                 Icons.swap_vert,
-                color: Theme.of(context).colorScheme.background,
+                color: colorScheme.background,
               ),
               onPressed: () =>
                   Provider.of<LaunchProvider>(context, listen: false)
@@ -67,10 +68,10 @@ class _HomeViewState extends State<HomeView> {
           IconButton(
             icon: Icon(
               Icons.sort,
-              color: Theme.of(context).colorScheme.background,
+              color: colorScheme.background,
             ),
             onPressed: () => showModalBottomSheet(
-              backgroundColor: Theme.of(context).colorScheme.onPrimary,
+              backgroundColor: colorScheme.onPrimary,
               context: context,
               builder: (BuildContext context) {
                 return const SortingBottomSheet();
@@ -80,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
           IconButton(
             icon: Icon(
               Icons.filter_alt,
-              color: Theme.of(context).colorScheme.background,
+              color: colorScheme.background,
             ),
             onPressed: () =>
                 Navigator.of(context).pushNamed(FilterView.routeName),
@@ -88,11 +89,14 @@ class _HomeViewState extends State<HomeView> {
           IconButton(
             icon: Icon(
               Icons.search,
-              color: Theme.of(context).colorScheme.background,
+              color: colorScheme.background,
             ),
             onPressed: () => showSearch(
-                context: context,
-                delegate: LaunchSearchDelegate(launches: launches)),
+              context: context,
+              delegate: LaunchSearchDelegate(
+                launches: launches,
+              ),
+            ),
           ),
         ],
       ),

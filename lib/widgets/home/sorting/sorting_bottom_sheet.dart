@@ -56,10 +56,12 @@ class _SortingBottomSheetState extends State<SortingBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
     return Padding(
       padding: const EdgeInsets.only(top: 10),
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.30,
+        height: size.height * 0.30,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
@@ -68,12 +70,11 @@ class _SortingBottomSheetState extends State<SortingBottomSheet> {
               child: Text(
                 'Sort by',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground),
+                      color: Theme.of(context).colorScheme.onBackground,
+                    ),
               ),
             ),
-            Divider(
-                indent: MediaQuery.of(context).size.width * 0.30,
-                endIndent: MediaQuery.of(context).size.width * 0.30),
+            Divider(indent: size.width * 0.30, endIndent: size.width * 0.30),
             ...sortingAttributes.entries
                 .map(
                   (attribute) => Expanded(

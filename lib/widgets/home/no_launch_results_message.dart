@@ -10,6 +10,9 @@ class NoLaunchResultsMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final TextTheme textTheme = Theme.of(context).textTheme;
+
     return Center(
       child: Padding(
         padding:
@@ -20,15 +23,21 @@ class NoLaunchResultsMessage extends StatelessWidget {
               Icons.search_off,
               size: MediaQuery.of(context).size.width * 0.3,
             ),
-            Text('No results found.',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer)),
+            Text(
+              'No results found.',
+              style: textTheme.headlineMedium?.copyWith(
+                color: colorScheme.onPrimaryContainer,
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 5),
-              child: Text(subText,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimaryContainer)),
-            )
+              child: Text(
+                subText,
+                style: textTheme.bodyMedium?.copyWith(
+                  color: colorScheme.onPrimaryContainer,
+                ),
+              ),
+            ),
           ],
         ),
       ),

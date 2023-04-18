@@ -14,6 +14,7 @@ class RocketInformationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final TextTheme textTheme = Theme.of(context).textTheme;
     Map<IconData, Color> statusColors = {
       Icons.cancel: colorScheme.error,
       Icons.check_circle: colorScheme.success,
@@ -50,7 +51,7 @@ class RocketInformationBar extends StatelessWidget {
                   color: statusColors[rocket?.status] ?? colorScheme.tertiary,
                 ), //check_circle
                 Text(rocket?.statusText ?? 'Unknown',
-                    style: Theme.of(context).textTheme.labelLarge),
+                    style: textTheme.labelLarge),
               ],
             ),
             Column(
@@ -58,10 +59,10 @@ class RocketInformationBar extends StatelessWidget {
               children: [
                 Text(
                   '${rocket?.successRatePct.toString()}%' ?? 'Unknown',
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: textTheme.titleLarge,
                 ),
                 Text('Success rate',
-                    style: Theme.of(context).textTheme.labelLarge),
+                    style: textTheme.labelLarge),
               ],
             ),
             Column(
@@ -69,10 +70,10 @@ class RocketInformationBar extends StatelessWidget {
               children: [
                 Text(
                   rocket?.launchPrice ?? 'Unknown',
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: textTheme.titleLarge,
                 ),
                 Text('Launch cost',
-                    style: Theme.of(context).textTheme.labelLarge),
+                    style: textTheme.labelLarge),
               ],
             ),
           ],

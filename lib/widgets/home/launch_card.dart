@@ -19,6 +19,8 @@ class LaunchCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Size size = MediaQuery.of(context).size;
     final String status = launch.status;
     final Map<IconData, String> icons = {
       Icons.person: launch.crew?.length.toString() ?? '0',
@@ -41,7 +43,7 @@ class LaunchCard extends StatelessWidget {
     ];
     final List<SizedBox> widgetsRowTwo = [
       SizedBox(
-        width: MediaQuery.of(context).size.width * 0.60,
+        width: size.width * 0.60,
         child: Text(
           launch.name == null ? 'Unnamed' : launch.name!,
           style: const TextStyle(overflow: TextOverflow.ellipsis),
@@ -49,13 +51,14 @@ class LaunchCard extends StatelessWidget {
       )
     ];
     final Map<String, Color> statusColors = {
-      'FAILED': Theme.of(context).colorScheme.error,
-      'SUCCESS': Theme.of(context).colorScheme.success,
-      'UPCOMING': Theme.of(context).colorScheme.tertiary,
+      'FAILED': colorScheme.error,
+      'SUCCESS': colorScheme.success,
+      'UPCOMING': colorScheme.tertiary,
     };
 
     return InkWell(
-      onTap: () => Navigator.of(context).pushNamed(RocketDetailsView.routeName, arguments: LaunchDetailsArguments(launch.rocket!)),
+      onTap: () => Navigator.of(context).pushNamed(RocketDetailsView.routeName,
+          arguments: LaunchDetailsArguments(launch.rocket!)),
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20.0),
@@ -70,25 +73,30 @@ class LaunchCard extends StatelessWidget {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.width * 0.02,
-                  right: MediaQuery.of(context).size.width * 0.02,
+                  left: size.width * 0.02,
+                  right: size.width * 0.02,
                 ),
                 child: Patch(
-                    key: ValueKey('patch-${launch.id}'),
-                    networkSource: launch.links?.patch?.small),
+                  key: ValueKey(
+                    'patch-${launch.id}',
+                  ),
+                  networkSource: launch.links?.patch?.small,
+                ),
               ),
-              SizedBox(width: MediaQuery.of(context).size.width * 0.030),
+              SizedBox(width: size.width * 0.030),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.66,
+                width: size.width * 0.66,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     WidgetRow(
-                        widgets: widgetsRowTwo,
-                        width: MediaQuery.of(context).size.width * 0.70),
+                      widgets: widgetsRowTwo,
+                      width: size.width * 0.70,
+                    ),
                     WidgetRow(
-                        widgets: widgetsRowOne,
-                        width: MediaQuery.of(context).size.width * 0.70),
+                      widgets: widgetsRowOne,
+                      width: size.width * 0.70,
+                    ),
                     IconRow(
                       icons: icons,
                       widget: StatusText(

@@ -26,13 +26,15 @@ class _FilterGridViewItemState extends State<FilterGridViewItem> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+
     return Material(
-      color: Theme.of(context).colorScheme.onPrimary,
+      color: colorScheme.onPrimary,
       child: InkWell(
         borderRadius: BorderRadius.circular(10),
         onTap: () => toggleFilterItem(),
-        highlightColor: Theme.of(context).colorScheme.tertiary,
-        splashColor: Theme.of(context).colorScheme.tertiary,
+        highlightColor: colorScheme.tertiary,
+        splashColor: colorScheme.tertiary,
         child: Container(
           padding: const EdgeInsets.symmetric(
             horizontal: 10,
@@ -40,10 +42,11 @@ class _FilterGridViewItemState extends State<FilterGridViewItem> {
           ),
           decoration: BoxDecoration(
               border: Border.all(
-                  color: Theme.of(context).colorScheme.surfaceVariant,
-                  width: 1.5),
+                color: colorScheme.surfaceVariant,
+                width: 1.5,
+              ),
               color: widget.enabled == true
-                  ? Theme.of(context).colorScheme.tertiary
+                  ? colorScheme.tertiary
                   : Colors.transparent,
               borderRadius: BorderRadius.circular(10)),
           child: Text(
@@ -51,8 +54,8 @@ class _FilterGridViewItemState extends State<FilterGridViewItem> {
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: widget.enabled == true
-                    ? Theme.of(context).colorScheme.onPrimary
-                    : Theme.of(context).colorScheme.onPrimaryContainer),
+                    ? colorScheme.onPrimary
+                    : colorScheme.onPrimaryContainer),
           ),
         ),
       ),
