@@ -13,6 +13,7 @@ class RocketDetailsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Orientation orientation = MediaQuery.of(context).orientation;
     final TextTheme textTheme = Theme.of(context).textTheme;
     final Map<String, String> detailsText = {
       'height': 'Height',
@@ -43,8 +44,8 @@ class RocketDetailsGrid extends StatelessWidget {
               style: textTheme.bodyMedium,
             ),
             GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: orientation == Orientation.portrait ? 3 : 6,
                 crossAxisSpacing: 20,
                 childAspectRatio: 1.5,
                 mainAxisSpacing: 20,

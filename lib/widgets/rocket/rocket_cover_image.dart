@@ -13,6 +13,7 @@ class RocketCoverImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final Orientation orientation = MediaQuery.of(context).orientation;
 
     return imageUrl == null
         ? const RocketImageContainer(
@@ -25,7 +26,7 @@ class RocketCoverImage extends StatelessWidget {
             imageBuilder: (context, imageProvider) =>
                 RocketImageContainer(imageProvider: imageProvider),
             placeholder: (context, url) => SizedBox(
-              height: size.height * 0.4 - 50,
+              height: size.height * (orientation == Orientation.portrait ? 0.4 : 1.5) - 50,
               child: const Center(
                 child: CircularProgressIndicator(),
               ),

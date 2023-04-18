@@ -59,6 +59,7 @@ class _RocketViewState extends State<RocketView> {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Orientation orientation = MediaQuery.of(context).orientation;
     final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -69,6 +70,7 @@ class _RocketViewState extends State<RocketView> {
               child: Column(
                 children: [
                   SizedBox(
+                    height: size.height * (orientation == Orientation.portrait ? 0.4 : 1.5),
                     child: Stack(
                       children: [
                         RocketCoverImage(imageUrl: _rocket?.flickrImages?.first),
