@@ -20,6 +20,8 @@ class FilterGridViewList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Orientation orientation = MediaQuery.of(context).orientation;
+
     return Container(
       height: height,
       decoration: BoxDecoration(
@@ -27,8 +29,8 @@ class FilterGridViewList extends StatelessWidget {
           borderRadius: BorderRadius.circular(5)),
       child: GridView.builder(
         padding: const EdgeInsets.only(left: 20, top: 20, right: 20),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 3,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: orientation == Orientation.portrait ? 3 : 6,
           crossAxisSpacing: 20,
           childAspectRatio: 2.6,
           mainAxisSpacing: 20,

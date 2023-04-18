@@ -115,6 +115,7 @@ class _FilterViewState extends State<FilterView> {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Orientation orientation = MediaQuery.of(context).orientation;
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
@@ -165,7 +166,9 @@ class _FilterViewState extends State<FilterView> {
             ),
             const FilterSubTitle(text: 'Years'),
             FilterGridViewList(
-              height: 380,
+              height: orientation == Orientation.portrait
+                  ? 380
+                  : (years.length / 6).ceil() * 70,
               texts: years,
               toggleFilter: toggleFilter,
               enabledItems: enabledItems,
