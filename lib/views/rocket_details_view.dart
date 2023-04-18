@@ -8,10 +8,10 @@ import 'package:space_x_tracker/providers/rocket_provider.dart';
 
 import '../widgets/flash_message.dart';
 
-class LaunchDetailsView extends StatefulWidget {
+class RocketDetailsView extends StatefulWidget {
   final http.Client client;
 
-  const LaunchDetailsView({
+  const RocketDetailsView({
     Key? key,
     required this.client,
   }) : super(key: key);
@@ -19,10 +19,10 @@ class LaunchDetailsView extends StatefulWidget {
   static const routeName = '/launch-details';
 
   @override
-  State<LaunchDetailsView> createState() => _LaunchDetailsViewState();
+  State<RocketDetailsView> createState() => _RocketDetailsViewState();
 }
 
-class _LaunchDetailsViewState extends State<LaunchDetailsView> {
+class _RocketDetailsViewState extends State<RocketDetailsView> {
   Rocket? _rocket;
   Map<String, dynamic>? _rocketMeasurements;
   final Map<String, String> detailsText = {
@@ -44,6 +44,10 @@ class _LaunchDetailsViewState extends State<LaunchDetailsView> {
               _rocket = rocket;
               _rocketMeasurements = rocket.rocketMeasurements;
             }));
+    // .catchError(
+    //   (_) => FlashMessage.show(
+    //       context: context, message: 'Unable to retrieve rocket'),
+    // );
   }
 
   @override
@@ -112,7 +116,7 @@ class _LaunchDetailsViewState extends State<LaunchDetailsView> {
                                   children: [
                                     Icon(
                                       _rocket?.status ?? Icons.help,
-                                      size: 27,
+                                      size: 28,
                                       color: statusColors[_rocket?.status] ?? colorScheme.tertiary,
                                     ), //check_circle
                                     Text(_rocket?.statusText ?? 'Unknown',

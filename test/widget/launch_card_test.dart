@@ -5,8 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
 import 'package:space_x_tracker/project_theme.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
-import 'package:space_x_tracker/widgets/icon_row_item.dart';
-import 'package:space_x_tracker/widgets/launch_card.dart';
+import 'package:space_x_tracker/widgets/home/icon_row_item.dart';
+import 'package:space_x_tracker/widgets/home/launch_card.dart';
 
 import 'launch_data.dart';
 

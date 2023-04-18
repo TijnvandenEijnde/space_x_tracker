@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:space_x_tracker/widgets/filters/filter_types.dart';
+import 'package:space_x_tracker/widgets/filter/filter_types.dart';
 
 class FilterGridViewItem extends StatefulWidget {
   final String text;

@@ -3,12 +3,12 @@ import 'package:provider/provider.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
 import 'package:space_x_tracker/views/filter_view.dart';
-import 'package:space_x_tracker/widgets/card_list_view.dart';
+import 'package:space_x_tracker/widgets/home/card_list_view.dart';
 import 'package:http/http.dart' as http;
 import 'package:space_x_tracker/widgets/flash_message.dart';
-import 'package:space_x_tracker/widgets/no_launch_results_message.dart';
-import 'package:space_x_tracker/widgets/searching/launch_search_delegate.dart';
-import 'package:space_x_tracker/widgets/sorting/sorting_bottom_sheet.dart';
+import 'package:space_x_tracker/widgets/home/no_launch_results_message.dart';
+import 'package:space_x_tracker/widgets/home/searching/launch_search_delegate.dart';
+import 'package:space_x_tracker/widgets/home/sorting/sorting_bottom_sheet.dart';
 
 class HomeView extends StatefulWidget {
   final http.Client client;

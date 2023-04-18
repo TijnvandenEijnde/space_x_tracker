@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
-import 'package:space_x_tracker/widgets/card_list_view.dart';
-import 'package:space_x_tracker/widgets/launch_card.dart';
+import 'package:space_x_tracker/widgets/home/card_list_view.dart';
+import 'package:space_x_tracker/widgets/home/launch_card.dart';
 
 import 'launch_data.dart';
 

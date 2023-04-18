@@ -3,9 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
-import 'package:space_x_tracker/widgets/card_list_view.dart';
-import 'package:space_x_tracker/widgets/no_launch_results_message.dart';
-import 'package:space_x_tracker/widgets/searching/no_search_results_message.dart';
+import 'package:space_x_tracker/widgets/home/card_list_view.dart';
+import 'package:space_x_tracker/widgets/home/no_launch_results_message.dart';
+import 'package:space_x_tracker/widgets/home/searching/no_search_results_message.dart';
 
 class LaunchSearchDelegate extends SearchDelegate {
   final List<Launch> launches;

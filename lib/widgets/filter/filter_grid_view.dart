@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:space_x_tracker/widgets/filters/filter_types.dart';
-import 'package:space_x_tracker/widgets/filters/filter_grid_view_item.dart';
+import 'package:space_x_tracker/widgets/filter/filter_grid_view_item.dart';
+import 'package:space_x_tracker/widgets/filter/filter_types.dart';
 
 class FilterGridViewList extends StatelessWidget {
   final double height;

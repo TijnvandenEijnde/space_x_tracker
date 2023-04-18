@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:space_x_tracker/widgets/icon_row_item.dart';
+import 'package:space_x_tracker/widgets/home/icon_row_item.dart';
 
 class IconRow extends StatelessWidget {
   final Map<IconData, String> icons;
