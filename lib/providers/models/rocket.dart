@@ -40,14 +40,14 @@ class Rocket {
     required this.successRatePct,
   });
 
-  Map<String, dynamic> get rocketMeasurements {
+  Map<String, dynamic> get rocketDetails {
     return {
-      "height": height?.meters == null ? 'Unknown' : '${height?.meters}m',
-      "diameter": diameter?.meters == null ? 'Unkown' : '${diameter?.meters}m',
-      "mass": '${NumberFormat.decimalPattern('de_DE').format(mass?.kg)}kg',
-      "stages": '$stages',
-      "boosters": '$boosters',
-      "payloads": '${payloadWeights?.length ?? 0}',
+      'height': height?.meters == null ? 'Unknown' : '${height?.meters}m',
+      'diameter': diameter?.meters == null ? 'Unknown' : '${diameter?.meters}m',
+      'mass': '${NumberFormat.decimalPattern('de_DE').format(mass?.kg)}kg',
+      'stages': '$stages',
+      'boosters': '$boosters',
+      'payloads': '${payloadWeights?.length ?? 0}',
     };
   }
 
@@ -62,7 +62,7 @@ class Rocket {
   }
 
   String get statusText {
-    return active == null ? 'Unknown' : (active == true  ? 'Active' : 'Inactive');
+    return active == null ? 'Unknown' : (active == true  ? 'ACTIVE' : 'INACTIVE');
   }
 
   factory Rocket.fromJson(Map<String, dynamic> json) => _$RocketFromJson(json);
