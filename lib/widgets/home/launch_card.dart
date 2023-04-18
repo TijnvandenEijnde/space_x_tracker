@@ -44,7 +44,9 @@ class LaunchCard extends StatelessWidget {
     ];
     final List<SizedBox> widgetsRowTwo = [
       SizedBox(
-        width: orientation == Orientation.portrait ? size.width * 0.60 : size.width * 0.25,
+        width: orientation == Orientation.portrait
+            ? size.width * 0.60
+            : size.width * 0.25,
         child: Text(
           launch.name == null ? 'Unnamed' : launch.name!,
           style: const TextStyle(overflow: TextOverflow.ellipsis),
@@ -84,28 +86,28 @@ class LaunchCard extends StatelessWidget {
                   networkSource: launch.links?.patch?.small,
                 ),
               ),
-              orientation == Orientation.portrait ? SizedBox(width: size.width * 0.030) : const SizedBox.shrink(),
+              orientation == Orientation.portrait
+                  ? SizedBox(width: size.width * 0.030)
+                  : const SizedBox.shrink(),
               Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    WidgetRow(
-                      widgets: widgetsRowTwo,
-                      width: size.width * 0.70,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  WidgetRow(
+                    widgets: widgetsRowTwo,
+                  ),
+                  WidgetRow(
+                    widgets: widgetsRowOne,
+                  ),
+                  IconRow(
+                    icons: icons,
+                    widget: StatusText(
+                      status: status,
+                      color: statusColors[status]!,
                     ),
-                    WidgetRow(
-                      widgets: widgetsRowOne,
-                      width: size.width * 0.70,
-                    ),
-                    IconRow(
-                      icons: icons,
-                      widget: StatusText(
-                        status: status,
-                        color: statusColors[status]!,
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
