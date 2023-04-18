@@ -6,7 +6,7 @@ import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/providers/rocket_provider.dart';
 import 'package:space_x_tracker/views/filter_view.dart';
 import 'package:space_x_tracker/views/home_view.dart';
-import 'package:space_x_tracker/views/rocket_details_view.dart';
+import 'package:space_x_tracker/views/rocket_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         home: HomeView(client: http.Client()),
         routes: {
           FilterView.routeName: (context) => const FilterView(),
-          RocketDetailsView.routeName: (context) => RocketDetailsView(client: http.Client()),
+          RocketView.routeName: (context) => RocketView(client: http.Client()),
         },
       ),
     );

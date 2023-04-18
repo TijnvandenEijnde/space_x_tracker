@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:space_x_tracker/custom_color_scheme.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
 import 'package:space_x_tracker/providers/models/launch_details_arguments.dart';
-import 'package:space_x_tracker/views/rocket_details_view.dart';
+import 'package:space_x_tracker/views/rocket_view.dart';
 import 'package:space_x_tracker/widgets/home/icon_row.dart';
 import 'package:space_x_tracker/widgets/home/patch.dart';
 import 'package:space_x_tracker/widgets/home/status_text.dart';
@@ -57,7 +57,7 @@ class LaunchCard extends StatelessWidget {
     };
 
     return InkWell(
-      onTap: () => Navigator.of(context).pushNamed(RocketDetailsView.routeName,
+      onTap: () => Navigator.of(context).pushNamed(RocketView.routeName,
           arguments: LaunchDetailsArguments(launch.rocket!)),
       child: Card(
         shape: RoundedRectangleBorder(

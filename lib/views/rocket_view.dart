@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -11,10 +10,10 @@ import 'package:space_x_tracker/widgets/rocket/rocket_information_bar.dart';
 
 import '../widgets/flash_message.dart';
 
-class RocketDetailsView extends StatefulWidget {
+class RocketView extends StatefulWidget {
   final http.Client client;
 
-  const RocketDetailsView({
+  const RocketView({
     Key? key,
     required this.client,
   }) : super(key: key);
@@ -22,10 +21,10 @@ class RocketDetailsView extends StatefulWidget {
   static const routeName = '/launch-details';
 
   @override
-  State<RocketDetailsView> createState() => _RocketDetailsViewState();
+  State<RocketView> createState() => _RocketViewState();
 }
 
-class _RocketDetailsViewState extends State<RocketDetailsView> {
+class _RocketViewState extends State<RocketView> {
   Rocket? _rocket;
   Map<String, dynamic>? _rocketDetails;
 
@@ -59,8 +58,8 @@ class _RocketDetailsViewState extends State<RocketDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: colorScheme.background,
@@ -70,7 +69,6 @@ class _RocketDetailsViewState extends State<RocketDetailsView> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: size.height * 0.4,
                     child: Stack(
                       children: [
                         RocketCoverImage(imageUrl: _rocket?.flickrImages?.first),
