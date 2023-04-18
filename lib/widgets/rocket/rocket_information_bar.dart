@@ -58,7 +58,7 @@ class RocketInformationBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${rocket?.successRatePct.toString()}%' ?? 'Unknown',
+                  rocket?.successRatePct == null ? 'Unknown' : '${rocket?.successRatePct}%',
                   style: textTheme.titleLarge,
                 ),
                 Text('Success rate',
