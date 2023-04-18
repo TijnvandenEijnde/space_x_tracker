@@ -48,7 +48,6 @@ class LaunchData {
     'date_unix': 1143239400,
     'date_local': '2006-03-25T10:30:00+12:00',
     'date_precision': 'hour',
-    'date_precision': 'hour',
     'upcoming': false,
     'cores': [
       {
