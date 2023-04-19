@@ -82,9 +82,6 @@ class LaunchCard extends StatelessWidget {
                 child: SizedBox(
                   width: 60,
                   child: Patch(
-                    key: ValueKey(
-                      'patch-${launch.id}',
-                    ),
                     networkSource: launch.links?.patch?.small,
                   ),
                 ),
