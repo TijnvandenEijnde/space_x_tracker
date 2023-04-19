@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:space_x_tracker/custom_color_scheme.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
 import 'package:space_x_tracker/views/filter_view.dart';
@@ -26,15 +27,30 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   List<Launch> launches = [];
-  bool loading = false;
+  bool loading = true;
 
   Future<void> _getLaunches() async {
-    await Provider.of<LaunchProvider>(context, listen: false)
-        .fetchLaunches(widget.client)
-        .catchError(
+    await Provider.of<LaunchProvider>(
+      context,
+      listen: false,
+    ).fetchLaunches(widget.client).then(
       (_) {
-        FlashMessage.show(context: context, message: 'Unable to retrieve data');
-        setState(() => loading = true);
+        if (loading == false) {
+          FlashMessage.show(
+              context: context,
+              color: Theme.of(context).colorScheme.success,
+              message: 'Refreshed the launches');
+        }
+
+        if (loading == true) {
+          setState(() => loading = false);
+        }
+      },
+    ).catchError(
+      (_) {
+        FlashMessage.show(
+            context: context, message: 'Unable to retrieve launches');
+        setState(() => loading = false);
       },
     );
   }
@@ -61,13 +77,20 @@ class _HomeViewState extends State<HomeView> {
         backgroundColor: colorScheme.primary,
         actions: [
           IconButton(
-              icon: Icon(
-                Icons.swap_vert,
-                color: colorScheme.background,
-              ),
-              onPressed: () =>
-                  Provider.of<LaunchProvider>(context, listen: false)
-                      .reverseLaunches()),
+            icon: Icon(
+              Icons.refresh,
+              color: colorScheme.background,
+            ),
+            onPressed: () => _getLaunches(),
+          ),
+          IconButton(
+            icon: Icon(
+              Icons.swap_vert,
+              color: colorScheme.background,
+            ),
+            onPressed: () => Provider.of<LaunchProvider>(context, listen: false)
+                .reverseLaunches(),
+          ),
           IconButton(
             icon: Icon(
               Icons.sort,
@@ -108,7 +131,7 @@ class _HomeViewState extends State<HomeView> {
               ? const NoLaunchResultsMessage(
                   subText: 'There are no launches matching these filters.',
                 )
-              : loading == true
+              : loading == false
                   ? const NoLaunchResultsMessage(
                       subText:
                           'We are unable to retrieve the launches at the moment, try the refresh button or came back at a later time.',
