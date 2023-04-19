@@ -79,11 +79,14 @@ class LaunchCard extends StatelessWidget {
                   left: size.width * 0.02,
                   right: size.width * 0.02,
                 ),
-                child: Patch(
-                  key: ValueKey(
-                    'patch-${launch.id}',
+                child: SizedBox(
+                  width: 60,
+                  child: Patch(
+                    key: ValueKey(
+                      'patch-${launch.id}',
+                    ),
+                    networkSource: launch.links?.patch?.small,
                   ),
-                  networkSource: launch.links?.patch?.small,
                 ),
               ),
               orientation == Orientation.portrait

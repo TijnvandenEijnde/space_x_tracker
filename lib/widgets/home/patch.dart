@@ -17,7 +17,6 @@ class Patch extends StatelessWidget {
           )
         : CachedNetworkImage(
             imageUrl: networkSource!,
-            fit: BoxFit.fill,
             placeholder: (context, url) => const Center(
               child: SizedBox(
                 child: CircularProgressIndicator(),
