@@ -11,17 +11,20 @@ class NoLaunchResultsMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Orientation orientation = MediaQuery.of(context).orientation;
+    final Size size = MediaQuery.of(context).size;
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return Center(
-      child: Padding(
-        padding:
-            EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.30),
+      child: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
               Icons.search_off,
-              size: MediaQuery.of(context).size.width * 0.3,
+              size: orientation == Orientation.portrait
+                  ? size.width * 0.3
+                  : size.height * 0.3,
             ),
             Text(
               'No results found.',
@@ -30,9 +33,10 @@ class NoLaunchResultsMessage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 5),
+              padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
               child: Text(
                 subText,
+                textAlign: TextAlign.center,
                 style: textTheme.bodyMedium?.copyWith(
                   color: colorScheme.onPrimaryContainer,
                 ),
