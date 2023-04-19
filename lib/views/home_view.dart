@@ -26,14 +26,17 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   List<Launch> launches = [];
+  bool loading = false;
 
   Future<void> _getLaunches() async {
     await Provider.of<LaunchProvider>(context, listen: false)
         .fetchLaunches(widget.client)
         .catchError(
-          (_) => FlashMessage.show(
-              context: context, message: 'Unable to retrieve data'),
-        );
+      (_) {
+        FlashMessage.show(context: context, message: 'Unable to retrieve data');
+        setState(() => loading = true);
+      },
+    );
   }
 
   @override
@@ -103,8 +106,14 @@ class _HomeViewState extends State<HomeView> {
       body: launches.isEmpty == true
           ? Provider.of<LaunchProvider>(context).filtered == true
               ? const NoLaunchResultsMessage(
-                  subText: 'There are no launches matching these filters.')
-              : const Center(child: CircularProgressIndicator())
+                  subText: 'There are no launches matching these filters.',
+                )
+              : loading == true
+                  ? const NoLaunchResultsMessage(
+                      subText:
+                          'We are unable to retrieve the launches at the moment, try the refresh button or came back at a later time.',
+                    )
+                  : const Center(child: CircularProgressIndicator())
           : Consumer<LaunchProvider>(builder: (context, launch, child) {
               return CardViewList(
                 launches: launches,
