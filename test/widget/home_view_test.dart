@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
+import 'package:integration_test/integration_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,10 @@ import 'launch_data.dart';
 
 @GenerateMocks([http.Client])
 void main() {
+  if (Platform.environment.containsKey('FLUTTER_TEST') == false) {
+    IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  }
+
   final http.Client client = MockClient();
   final theme = ProjectTheme.lightTheme;
   final List<Map<String, dynamic>> launches = LaunchData.encodedLaunches;
