@@ -10,18 +10,16 @@ class WidgetRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      child: Row(
+    return Row(
         children: widgets
             .map(
               (Widget text) => Padding(
                 padding: EdgeInsets.only(
                     right: MediaQuery.of(context).size.width * 0.02),
-                child: SizedBox(child: text),
+                child: text,
               ),
             )
             .toList(),
-      ),
     );
   }
 }
