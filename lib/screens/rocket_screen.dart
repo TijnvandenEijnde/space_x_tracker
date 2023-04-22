@@ -75,7 +75,9 @@ class _RocketViewState extends State<RocketView> {
                     child: Stack(
                       children: [
                         RocketCoverImage(
-                            imageUrl: _rocket?.flickrImages?.isEmpty == true ? null : _rocket?.flickrImages?.first),
+                            imageUrl: _rocket?.flickrImages?.isEmpty == true
+                                ? null
+                                : _rocket?.flickrImages?.first),
                         RocketInformationBar(rocket: _rocket),
                         SafeArea(
                             child: BackButton(

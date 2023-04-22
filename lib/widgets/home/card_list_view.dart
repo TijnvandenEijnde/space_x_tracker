@@ -18,7 +18,11 @@ class CardViewList extends StatelessWidget {
 
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: orientation == Orientation.portrait ? 1 : size.width > 800 ? 2 : 1,
+        crossAxisCount: orientation == Orientation.portrait
+            ? 1
+            : size.width > 800
+                ? 2
+                : 1,
         crossAxisSpacing: 0,
         childAspectRatio: orientation == Orientation.portrait ? 4 : 4,
         mainAxisSpacing: 0,

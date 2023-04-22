@@ -62,8 +62,7 @@ void main() {
       expect(crew.icon, Icons.person);
     });
 
-    testWidgets(
-        'it displays the default placeholder when patch data is null',
+    testWidgets('it displays the default placeholder when patch data is null',
         (WidgetTester tester) async {
       await createWidgetUnderTest(tester, LaunchData.upcomingLaunch);
 
@@ -76,7 +75,8 @@ void main() {
       Image placeHolderImage = tester.widget(placeHolder);
       AssetImage placeHolderAssetImage = placeHolderImage.image as AssetImage;
 
-      expect(placeHolderAssetImage.assetName, 'assets/placeholders/rocket-placeholder-small.png');
+      expect(placeHolderAssetImage.assetName,
+          'assets/placeholders/rocket-placeholder-small.png');
     });
   });
 

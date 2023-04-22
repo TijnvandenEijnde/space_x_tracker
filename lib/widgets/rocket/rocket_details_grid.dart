@@ -73,8 +73,8 @@ class RocketDetailsGrid extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          rocket
-                              ?.rocketDetails[detailsText.keys.elementAt(index)],
+                          rocket?.rocketDetails[
+                              detailsText.keys.elementAt(index)],
                           style: textTheme.titleMedium,
                         ),
                       ),

@@ -23,21 +23,22 @@ void main() {
   final http.Client client = MockClient();
   final theme = ProjectTheme.lightTheme;
   final List<Map<String, dynamic>> launches = LaunchData.launchesToJson;
-  final List<Map<String, dynamic>> launchesWithoutPatches = LaunchData.launchesToJsonWithoutPatches;
+  final List<Map<String, dynamic>> launchesWithoutPatches =
+      LaunchData.launchesToJsonWithoutPatches;
 
   if (Platform.environment.containsKey('FLUTTER_TEST') == false) {
     IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
     when(client.get(Uri.parse('https://api.spacexdata.com/v5/launches')))
         .thenAnswer(
-          (_) async => http.Response(jsonEncode(launches), 200),
+      (_) async => http.Response(jsonEncode(launches), 200),
     );
   } else {
     // When running the regular widget tests there is an issue with the CachedNetworkImage.
     // To avoid this the placeholder AssetImage is loaded instead, because the patches will be null.
     when(client.get(Uri.parse('https://api.spacexdata.com/v5/launches')))
         .thenAnswer(
-          (_) async => http.Response(jsonEncode(launchesWithoutPatches), 200),
+      (_) async => http.Response(jsonEncode(launchesWithoutPatches), 200),
     );
   }
 
