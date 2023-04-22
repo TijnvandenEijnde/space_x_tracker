@@ -10,12 +10,9 @@ targets:
       mockito|mockBuilder:
         generate_for:
           - test/**.dart
-          - integration_test/**.dart
 
       json_serializable:
         options:
-          # Options configure how source code is generated for every
-          # `@JsonSerializable`-annotated class in the package.
           any_map: false
           checked: false
           constructor: ""
