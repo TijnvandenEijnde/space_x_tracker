@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -64,7 +63,7 @@ void main() {
     });
 
     testWidgets(
-        'it displays a text widget with a rocket when patch data is null',
+        'it displays the default placeholder when patch data is null',
         (WidgetTester tester) async {
       await createWidgetUnderTest(tester, LaunchData.upcomingLaunch);
 
