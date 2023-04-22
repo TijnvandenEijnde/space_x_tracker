@@ -70,46 +70,46 @@ class LaunchCard extends StatelessWidget {
             width: 1.5,
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  left: size.width * 0.02,
-                  right: size.width * 0.02,
-                ),
-                child: SizedBox(
-                  width: 60,
-                  child: Patch(
-                    networkSource: launch.links?.patch?.small,
-                  ),
+        child: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: size.width * 0.02,
+                vertical: orientation == Orientation.portrait
+                    ? size.height * 0.005
+                    : size.height * 0.01,
+              ),
+              child: SizedBox(
+                width: 70,
+                height: 70,
+                child: Patch(
+                  networkSource: launch.links?.patch?.small,
                 ),
               ),
-              orientation == Orientation.portrait
-                  ? SizedBox(width: size.width * 0.030)
-                  : const SizedBox.shrink(),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  WidgetRow(
-                    widgets: widgetsRowTwo,
+            ),
+            orientation == Orientation.portrait
+                ? SizedBox(width: size.width * 0.030)
+                : const SizedBox.shrink(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                WidgetRow(
+                  widgets: widgetsRowTwo,
+                ),
+                WidgetRow(
+                  widgets: widgetsRowOne,
+                ),
+                IconRow(
+                  icons: icons,
+                  widget: StatusText(
+                    status: status,
+                    color: statusColors[status]!,
                   ),
-                  WidgetRow(
-                    widgets: widgetsRowOne,
-                  ),
-                  IconRow(
-                    icons: icons,
-                    widget: StatusText(
-                      status: status,
-                      color: statusColors[status]!,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
