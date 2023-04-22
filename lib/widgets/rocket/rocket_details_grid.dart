@@ -64,17 +64,19 @@ class RocketDetailsGrid extends StatelessWidget {
                           width: 1.5),
                       borderRadius: BorderRadius.circular(10)),
                   child: Column(
-                    // crossAxisAlignment:
-                    // CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        detailsText.values.elementAt(index),
-                        style: textTheme.bodyMedium,
+                      Expanded(
+                        child: Text(
+                          detailsText.values.elementAt(index),
+                          style: textTheme.bodyMedium,
+                        ),
                       ),
-                      Text(
-                        rocket
-                            ?.rocketDetails[detailsText.keys.elementAt(index)],
-                        style: textTheme.titleMedium,
+                      Expanded(
+                        child: Text(
+                          rocket
+                              ?.rocketDetails[detailsText.keys.elementAt(index)],
+                          style: textTheme.titleMedium,
+                        ),
                       ),
                     ],
                   ),
