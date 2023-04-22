@@ -24,7 +24,6 @@ class CardViewList extends StatelessWidget {
         mainAxisSpacing: 0,
       ),
       itemCount: launches.length,
-      shrinkWrap: true,
       itemBuilder: (BuildContext context, int index) => Padding(
         padding: const EdgeInsets.all(8.0),
         child: LaunchCard(launch: launches[index]),
