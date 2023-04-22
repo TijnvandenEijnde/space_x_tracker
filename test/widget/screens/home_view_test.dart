@@ -16,14 +16,14 @@ import 'package:space_x_tracker/views/home_view.dart';
 import 'package:space_x_tracker/widgets/home/launch_card.dart';
 
 import 'home_view_test.mocks.dart';
-import 'launch_data.dart';
+import '../data/launch_data.dart';
 
 @GenerateMocks([http.Client])
 void main() {
   final http.Client client = MockClient();
   final theme = ProjectTheme.lightTheme;
-  final List<Map<String, dynamic>> launches = LaunchData.encodedLaunches;
-  final List<Map<String, dynamic>> launchesWithoutPatches = LaunchData.encodedLaunchesWithoutPatches;
+  final List<Map<String, dynamic>> launches = LaunchData.launchesToJson;
+  final List<Map<String, dynamic>> launchesWithoutPatches = LaunchData.launchesToJsonWithoutPatches;
 
   if (Platform.environment.containsKey('FLUTTER_TEST') == false) {
     IntegrationTestWidgetsFlutterBinding.ensureInitialized();
