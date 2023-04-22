@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:space_x_tracker/project_theme.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/providers/rocket_provider.dart';
-import 'package:space_x_tracker/views/filter_view.dart';
-import 'package:space_x_tracker/views/home_view.dart';
-import 'package:space_x_tracker/views/rocket_view.dart';
+import 'package:space_x_tracker/screens/filter_screen.dart';
+import 'package:space_x_tracker/screens/home_screen.dart';
+import 'package:space_x_tracker/screens/rocket_screen.dart';
 
 void main() {
   runApp(const MyApp());

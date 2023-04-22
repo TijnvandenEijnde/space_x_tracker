@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:space_x_tracker/project_theme.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
-import 'package:space_x_tracker/views/filter_view.dart';
+import 'package:space_x_tracker/screens/filter_screen.dart';
 
 void main() {
   if (Platform.environment.containsKey('FLUTTER_TEST') == false) {
