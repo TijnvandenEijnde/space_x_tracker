@@ -14,10 +14,11 @@ class CardViewList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Orientation orientation = MediaQuery.of(context).orientation;
+    final Size size = MediaQuery.of(context).size;
 
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: orientation == Orientation.portrait ? 1 : 2,
+        crossAxisCount: orientation == Orientation.portrait ? 1 : size.width > 800 ? 2 : 1,
         crossAxisSpacing: 0,
         childAspectRatio: orientation == Orientation.portrait ? 4 : 4,
         mainAxisSpacing: 0,

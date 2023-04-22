@@ -1,4 +1,6 @@
 import 'package:space_x_tracker/providers/models/launch.dart';
+import 'package:space_x_tracker/providers/models/link.dart';
+import 'package:space_x_tracker/providers/models/patch.dart';
 
 class LaunchData {
   static final Map<String, dynamic> launchData = {
@@ -110,6 +112,34 @@ class LaunchData {
     return [
       failedLaunch.toJson(),
       successLaunch.toJson(),
+      upcomingLaunch.toJson(),
+    ];
+  }
+
+  static List<Map<String, dynamic>> get encodedLaunchesWithoutPatches {
+    Map<String, dynamic> failedLaunchWithoutPatch = failedLaunch.toJson();
+    failedLaunchWithoutPatch['links'] = Link(
+      patch: Patch(
+        small: null,
+        large: null,
+      ),
+      webcast: null,
+      article: null,
+    );
+
+    Map<String, dynamic> successLaunchWithoutPatch = successLaunch.toJson();
+    successLaunchWithoutPatch['links'] = Link(
+      patch: Patch(
+        small: null,
+        large: null,
+      ),
+      webcast: null,
+      article: null,
+    );
+
+    return [
+      failedLaunchWithoutPatch,
+      successLaunchWithoutPatch,
       upcomingLaunch.toJson()
     ];
   }
