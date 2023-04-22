@@ -7,7 +7,7 @@ import 'package:space_x_tracker/providers/models/launch.dart';
 import 'package:space_x_tracker/widgets/home/card_list_view.dart';
 import 'package:space_x_tracker/widgets/home/launch_card.dart';
 
-import 'launch_data.dart';
+import 'data/launch_data.dart';
 
 void main() {
   if (Platform.environment.containsKey('FLUTTER_TEST') == false) {

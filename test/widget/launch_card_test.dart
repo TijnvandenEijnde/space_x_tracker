@@ -10,7 +10,7 @@ import 'package:space_x_tracker/widgets/home/icon_row_item.dart';
 import 'package:space_x_tracker/widgets/home/launch_card.dart';
 import 'package:space_x_tracker/widgets/home/patch.dart';
 
-import 'launch_data.dart';
+import 'data/launch_data.dart';
 
 void main() {
   if (Platform.environment.containsKey('FLUTTER_TEST') == false) {

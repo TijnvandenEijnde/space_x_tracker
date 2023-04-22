@@ -76,9 +76,8 @@ class LaunchData {
     modifiedLaunchData['date_local'] = '2007-03-25T10:30:00+12:00';
     modifiedLaunchData['flight_number'] = 2;
     modifiedLaunchData['name'] = 'FalconY';
-    Launch launch = Launch.fromJson(modifiedLaunchData);
 
-    return launch;
+    return Launch.fromJson(modifiedLaunchData);
   }
 
   static Launch get failedLaunch {
@@ -95,9 +94,8 @@ class LaunchData {
       'small': null,
       'large': null,
     };
-    Launch launch = Launch.fromJson(modifiedLaunchData);
 
-    return launch;
+    return Launch.fromJson(modifiedLaunchData);
   }
 
   static List<Launch> get launches {
@@ -108,7 +106,7 @@ class LaunchData {
     ];
   }
 
-  static List<Map<String, dynamic>> get encodedLaunches {
+  static List<Map<String, dynamic>> get launchesToJson {
     return [
       failedLaunch.toJson(),
       successLaunch.toJson(),
@@ -116,7 +114,17 @@ class LaunchData {
     ];
   }
 
-  static List<Map<String, dynamic>> get encodedLaunchesWithoutPatches {
+  static Launch get launchWithoutPatch {
+    Map<String, dynamic> modifiedLaunchData = {...launchData};
+    modifiedLaunchData['links']['patch'] = {
+      'small': null,
+      'large': null,
+    };
+
+    return Launch.fromJson(modifiedLaunchData);
+  }
+
+  static List<Map<String, dynamic>> get launchesToJsonWithoutPatches {
     Map<String, dynamic> failedLaunchWithoutPatch = failedLaunch.toJson();
     failedLaunchWithoutPatch['links'] = Link(
       patch: Patch(
