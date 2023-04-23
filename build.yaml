@@ -5,12 +5,10 @@ targets:
       - lib/$lib$
       - lib/**.dart
       - test/**.dart
-#      - integration_test/**.dart
     builders:
       mockito|mockBuilder:
         generate_for:
           - test/**.dart
-
       json_serializable:
         options:
           any_map: false
