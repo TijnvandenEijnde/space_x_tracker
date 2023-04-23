@@ -7,7 +7,6 @@ part 'launch.g.dart';
 
 @JsonSerializable()
 class Launch {
-  // @todo add getters for all the values that are used, in the future the data that is not needed can be removed.
   final List<Core>? cores;
   final List<Crew>? crew;
   final DateTime? dateLocal;
