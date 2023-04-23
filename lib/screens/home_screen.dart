@@ -4,7 +4,7 @@ import 'package:space_x_tracker/custom_color_scheme.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
 import 'package:space_x_tracker/screens/filter_screen.dart';
-import 'package:space_x_tracker/widgets/home/list/card_list_view.dart';
+import 'package:space_x_tracker/widgets/home/list/card_list.dart';
 import 'package:http/http.dart' as http;
 import 'package:space_x_tracker/widgets/flash_message.dart';
 import 'package:space_x_tracker/widgets/home/no_launch_results_message.dart';

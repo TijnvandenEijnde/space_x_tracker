@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
-import 'package:space_x_tracker/widgets/home/list/card_list_view.dart';
+import 'package:space_x_tracker/widgets/home/list/card_list.dart';
 import 'package:space_x_tracker/widgets/home/card/launch_card.dart';
 
 import 'data/launch_data.dart';
