@@ -3,10 +3,10 @@ import 'package:space_x_tracker/providers/models/launch.dart';
 import 'package:space_x_tracker/widgets/home/list/card_grid_view.dart';
 import 'package:space_x_tracker/widgets/home/list/card_list_view_responsive_layout.dart';
 
-class CardViewList extends StatelessWidget {
+class CardList extends StatelessWidget {
   final List<Launch> launches;
 
-  const CardViewList({
+  const CardList({
     Key? key,
     required this.launches,
   }) : super(key: key);

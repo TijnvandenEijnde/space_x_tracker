@@ -138,7 +138,7 @@ class _HomeViewState extends State<HomeView> {
                     )
                   : const Center(child: CircularProgressIndicator())
           : Consumer<LaunchProvider>(builder: (context, launch, child) {
-              return CardViewList(
+              return CardList(
                 launches: launches,
               );
             }),

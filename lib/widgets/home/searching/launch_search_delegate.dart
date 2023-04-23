@@ -33,7 +33,7 @@ class LaunchSearchDelegate extends SearchDelegate {
         return results.isEmpty == true
             ? const NoLaunchResultsMessage(
                 subText: 'There are no launches matching this search.')
-            : CardViewList(
+            : CardList(
                 launches: results,
               );
       });
@@ -60,7 +60,7 @@ class LaunchSearchDelegate extends SearchDelegate {
     return Consumer<LaunchProvider>(builder: (context, launch, child) {
       return results.isEmpty == true && query != ''
           ? const NoSearchResultsMessage()
-          : CardViewList(
+          : CardList(
               launches: results,
             );
     });

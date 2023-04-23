@@ -18,7 +18,7 @@ void main() {
 
   Future<void> createWidgetUnderTest(WidgetTester tester) async {
     Widget widgetUnderTest = MaterialApp(
-      home: Material(child: CardViewList(launches: launches)),
+      home: Material(child: CardList(launches: launches)),
     );
 
     await tester.pumpWidget(widgetUnderTest);
