@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
-import 'package:space_x_tracker/widgets/home/card_list_view.dart';
+import 'package:space_x_tracker/widgets/home/list/card_list.dart';
 import 'package:space_x_tracker/widgets/home/no_launch_results_message.dart';
 import 'package:space_x_tracker/widgets/home/searching/no_search_results_message.dart';
 
@@ -33,7 +33,7 @@ class LaunchSearchDelegate extends SearchDelegate {
         return results.isEmpty == true
             ? const NoLaunchResultsMessage(
                 subText: 'There are no launches matching this search.')
-            : CardViewList(
+            : CardList(
                 launches: results,
               );
       });
@@ -60,7 +60,7 @@ class LaunchSearchDelegate extends SearchDelegate {
     return Consumer<LaunchProvider>(builder: (context, launch, child) {
       return results.isEmpty == true && query != ''
           ? const NoSearchResultsMessage()
-          : CardViewList(
+          : CardList(
               launches: results,
             );
     });
