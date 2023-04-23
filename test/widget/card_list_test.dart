@@ -10,7 +10,9 @@ import 'package:space_x_tracker/widgets/home/card/launch_card.dart';
 import 'data/launch_data.dart';
 
 void main() {
-  if (Platform.environment.containsKey('FLUTTER_TEST') == false) {
+  final isWidgetTest = Platform.environment.containsKey('FLUTTER_TEST');
+
+  if (isWidgetTest == false) {
     IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   }
 
@@ -20,6 +22,10 @@ void main() {
     Widget widgetUnderTest = MaterialApp(
       home: Material(child: CardList(launches: launches)),
     );
+
+    if (isWidgetTest == true) {
+      await tester.binding.setSurfaceSize(const Size(725, 400));
+    }
 
     await tester.pumpWidget(widgetUnderTest);
   }
