@@ -59,6 +59,9 @@ class LaunchCard extends StatelessWidget {
     };
 
     return InkWell(
+      borderRadius: BorderRadius.circular(20.0),
+      highlightColor: statusColors[status]!,
+      splashColor: statusColors[status]!,
       onTap: () => Navigator.of(context).pushNamed(RocketView.routeName,
           arguments: LaunchDetailsArguments(launch.rocket!)),
       child: Card(
