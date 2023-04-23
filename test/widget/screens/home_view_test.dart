@@ -27,7 +27,7 @@ void main() {
       ? LaunchData.launchesToJsonWithoutPatches
       : LaunchData.launchesToJson;
 
-  if (Platform.environment.containsKey('FLUTTER_TEST') == false) {
+  if (isWidgetTest == false) {
     IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   }
 
@@ -50,7 +50,10 @@ void main() {
       ),
     );
 
-    await tester.binding.setSurfaceSize(const Size(725, 400));
+    if (isWidgetTest == true) {
+      await tester.binding.setSurfaceSize(const Size(725, 400));
+    }
+
     await tester.pumpWidget(widgetUnderTest);
   }
 
