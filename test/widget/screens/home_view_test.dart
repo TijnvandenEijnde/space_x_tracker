@@ -21,26 +21,22 @@ import '../data/launch_data.dart';
 @GenerateMocks([http.Client])
 void main() {
   final http.Client client = MockClient();
+  final isWidgetTest = Platform.environment.containsKey('FLUTTER_TEST');
   final theme = ProjectTheme.lightTheme;
-  final List<Map<String, dynamic>> launches = LaunchData.launchesToJson;
-  final List<Map<String, dynamic>> launchesWithoutPatches =
-      LaunchData.launchesToJsonWithoutPatches;
+  final List<Map<String, dynamic>> launches = isWidgetTest == true
+      ? LaunchData.launchesToJsonWithoutPatches
+      : LaunchData.launchesToJson;
 
   if (Platform.environment.containsKey('FLUTTER_TEST') == false) {
     IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-
-    when(client.get(Uri.parse('https://api.spacexdata.com/v5/launches')))
-        .thenAnswer(
-      (_) async => http.Response(jsonEncode(launches), 200),
-    );
-  } else {
-    // When running the regular widget tests there is an issue with the CachedNetworkImage.
-    // To avoid this the placeholder AssetImage is loaded instead, because the patches will be null.
-    when(client.get(Uri.parse('https://api.spacexdata.com/v5/launches')))
-        .thenAnswer(
-      (_) async => http.Response(jsonEncode(launchesWithoutPatches), 200),
-    );
   }
+
+  // When running the regular widget tests there is an issue with the CachedNetworkImage.
+  // To avoid this the placeholder AssetImage is loaded instead, because the patches will be null.
+  when(client.get(Uri.parse('https://api.spacexdata.com/v5/launches')))
+      .thenAnswer(
+    (_) async => http.Response(jsonEncode(launches), 200),
+  );
 
   Future<void> createWidgetUnderTest(WidgetTester tester) async {
     Widget widgetUnderTest = ChangeNotifierProvider(

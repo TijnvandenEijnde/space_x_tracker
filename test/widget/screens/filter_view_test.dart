@@ -11,14 +11,14 @@ import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/screens/filter_screen.dart';
 
 void main() {
-  if (Platform.environment.containsKey('FLUTTER_TEST') == false) {
-    IntegrationTestWidgetsFlutterBinding.ensureInitialized();
-  }
-
   final theme = ProjectTheme.lightTheme;
   final Color onPrimaryColor = theme!.colorScheme.onPrimary;
   final Color onPrimaryContainerColor = theme.colorScheme.onPrimaryContainer;
   final Color tertiaryColor = theme.colorScheme.tertiary;
+
+  if (Platform.environment.containsKey('FLUTTER_TEST') == false) {
+    IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  }
 
   Future<void> createWidgetUnderTest(WidgetTester tester) async {
     Widget widgetUnderTest = ChangeNotifierProvider(
