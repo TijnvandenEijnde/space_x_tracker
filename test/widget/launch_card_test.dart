@@ -2,15 +2,21 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
 import 'package:intl/intl.dart';
 import 'package:space_x_tracker/project_theme.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
-import 'package:space_x_tracker/widgets/icon_row_item.dart';
-import 'package:space_x_tracker/widgets/launch_card.dart';
+import 'package:space_x_tracker/widgets/home/icon_row_item.dart';
+import 'package:space_x_tracker/widgets/home/launch_card.dart';
+import 'package:space_x_tracker/widgets/home/patch.dart';
 
-import 'launch_data.dart';
+import 'data/launch_data.dart';
 
 void main() {
+  if (Platform.environment.containsKey('FLUTTER_TEST') == false) {
+    IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  }
+
   final Launch launch = LaunchData.failedLaunch;
   const Color errorColor = Color(0xffb00020);
   const Color successColor = Color(0xFF39DC03);
@@ -18,7 +24,7 @@ void main() {
 
   Future<void> createWidgetUnderTest(WidgetTester tester, Launch launch) async {
     Widget widgetUnderTest = MaterialApp(
-      home: LaunchCard(launch: launch),
+      home: Material(child: LaunchCard(launch: launch)),
       theme: ProjectTheme.lightTheme,
     );
     await tester.pumpWidget(widgetUnderTest);
@@ -31,8 +37,9 @@ void main() {
         (WidgetTester tester) async {
       await createWidgetUnderTest(tester, launch);
 
-      Finder image = find.byWidgetPredicate((Widget widget) =>
-          widget is Image && widget.key == ValueKey('patch-${launch.id}'));
+      Finder patch = find.byType(Patch);
+      Patch patchWidget = tester.widget(patch);
+
       Finder flightNumber = find.text('#${launch.flightNumber.toString()}');
       Finder name = find.text(launch.name!);
       Finder failed = find.text('FAILED');
@@ -42,8 +49,8 @@ void main() {
       Finder icons = find.byType(IconRowItem);
       IconRowItem crew = tester.widget(icons.first);
 
-      expect(image, findsOneWidget);
-      expect(image.toString().contains(launch.links!.patch!.small!), true);
+      expect(patch, findsOneWidget);
+      expect(patchWidget.networkSource, launch.links!.patch!.small!);
 
       expect(flightNumber, findsOneWidget);
       expect(name, findsOneWidget);
@@ -55,22 +62,21 @@ void main() {
       expect(crew.icon, Icons.person);
     });
 
-    testWidgets(
-        'it displays a text widget with a rocket when patch data is null',
+    testWidgets('it displays the default placeholder when patch data is null',
         (WidgetTester tester) async {
       await createWidgetUnderTest(tester, LaunchData.upcomingLaunch);
 
-      Finder image = find.byWidgetPredicate(
-        (Widget widget) =>
-            widget is Image &&
-            widget.key == ValueKey('patch-${LaunchData.upcomingLaunch.id}'),
-      );
-      Finder rocket = find.text('🚀');
-      Text rocketTextWidget = tester.widget(rocket);
+      Finder patch = find.byType(Patch);
+      expect(patch, findsOneWidget);
 
-      expect(image, findsNothing);
-      expect(rocket, findsOneWidget);
-      expect(rocketTextWidget.style?.fontSize, 50);
+      Finder placeHolder = find.byType(Image);
+      expect(placeHolder, findsOneWidget);
+
+      Image placeHolderImage = tester.widget(placeHolder);
+      AssetImage placeHolderAssetImage = placeHolderImage.image as AssetImage;
+
+      expect(placeHolderAssetImage.assetName,
+          'assets/placeholders/rocket-placeholder-small.png');
     });
   });
 

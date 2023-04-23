@@ -2,18 +2,23 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:integration_test/integration_test.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
-import 'package:space_x_tracker/widgets/card_list_view.dart';
-import 'package:space_x_tracker/widgets/launch_card.dart';
+import 'package:space_x_tracker/widgets/home/card_list_view.dart';
+import 'package:space_x_tracker/widgets/home/launch_card.dart';
 
-import 'launch_data.dart';
+import 'data/launch_data.dart';
 
 void main() {
+  if (Platform.environment.containsKey('FLUTTER_TEST') == false) {
+    IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+  }
+
   final List<Launch> launches = LaunchData.launches;
 
   Future<void> createWidgetUnderTest(WidgetTester tester) async {
     Widget widgetUnderTest = MaterialApp(
-      home: CardViewList(launches: launches),
+      home: Material(child: CardViewList(launches: launches)),
     );
 
     await tester.pumpWidget(widgetUnderTest);

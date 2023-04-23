@@ -3,8 +3,10 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:space_x_tracker/project_theme.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
-import 'package:space_x_tracker/views/filter_view.dart';
-import 'package:space_x_tracker/views/home_view.dart';
+import 'package:space_x_tracker/providers/rocket_provider.dart';
+import 'package:space_x_tracker/screens/filter_screen.dart';
+import 'package:space_x_tracker/screens/home_screen.dart';
+import 'package:space_x_tracker/screens/rocket_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +22,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => LaunchProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => RocketProvider(),
         )
       ],
       child: MaterialApp(
@@ -28,6 +33,7 @@ class MyApp extends StatelessWidget {
         home: HomeView(client: http.Client()),
         routes: {
           FilterView.routeName: (context) => const FilterView(),
+          RocketView.routeName: (context) => RocketView(client: http.Client()),
         },
       ),
     );
