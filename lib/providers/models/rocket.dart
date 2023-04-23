@@ -10,9 +10,7 @@ part 'rocket.g.dart';
 class Rocket {
   final bool? active;
   final int? boosters;
-  final String? company;
   final int? costPerLaunch;
-  final String? country;
   final String? description;
   final Length? diameter;
   final List<String>? flickrImages;
@@ -26,8 +24,6 @@ class Rocket {
   Rocket({
     required this.active,
     required this.boosters,
-    required this.company,
-    required this.country,
     required this.costPerLaunch,
     required this.description,
     required this.diameter,
