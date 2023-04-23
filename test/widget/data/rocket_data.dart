@@ -4,9 +4,7 @@ class RocketData {
   static final Map<String, dynamic> rocketData = {
     'active': true,
     'boosters': 0,
-    'company': 'SpaceX',
     'cost_per_launch': 50000000,
-    'country': 'United States',
     'description':
         'Falcon 9 is a two-stage rocket designed and manufactured by SpaceX for the reliable and safe transport of satellites and the Dragon spacecraft into orbit.',
     'diameter': {'meters': 3.7, 'feet': 12},
