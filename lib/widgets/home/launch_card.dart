@@ -21,6 +21,7 @@ class LaunchCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     final Orientation orientation = MediaQuery.of(context).orientation;
+    final bool isPortrait = orientation == Orientation.portrait;
     final Size size = MediaQuery.of(context).size;
     final String status = launch.status;
     final Map<IconData, String> icons = {
@@ -44,9 +45,7 @@ class LaunchCard extends StatelessWidget {
     ];
     final List<SizedBox> widgetsRowTwo = [
       SizedBox(
-        width: orientation == Orientation.portrait
-            ? size.width * 0.60
-            : size.width * 0.25,
+        width: isPortrait ? size.width * 0.60 : size.width * 0.25,
         child: Text(
           launch.name == null ? 'Unnamed' : launch.name!,
           style: const TextStyle(overflow: TextOverflow.ellipsis),
@@ -75,9 +74,7 @@ class LaunchCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: size.width * 0.02,
-                vertical: orientation == Orientation.portrait
-                    ? size.height * 0.005
-                    : size.height * 0.01,
+                vertical: isPortrait ? size.height * 0.005 : size.height * 0.01,
               ),
               child: SizedBox(
                 width: 70,
@@ -87,7 +84,7 @@ class LaunchCard extends StatelessWidget {
                 ),
               ),
             ),
-            orientation == Orientation.portrait
+            isPortrait
                 ? SizedBox(width: size.width * 0.030)
                 : const SizedBox.shrink(),
             Column(
