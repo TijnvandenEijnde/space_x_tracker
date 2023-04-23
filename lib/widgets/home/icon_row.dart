@@ -13,14 +13,9 @@ class IconRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    final Orientation orientation = MediaQuery.of(context).orientation;
-    final double padding =
-        orientation == Orientation.portrait ? size.width * 0.025 : 7.5;
-
     List<Widget> iconList = icons.entries.map((icon) {
       return Padding(
-        padding: EdgeInsets.only(right: padding),
+        padding: const EdgeInsets.only(right: 5),
         child: IconRowItem(count: icon.value, icon: icon.key),
       );
     }).toList();
@@ -29,20 +24,14 @@ class IconRow extends StatelessWidget {
       iconList.insert(
         0,
         Padding(
-          padding: EdgeInsets.only(right: padding),
+          padding: const EdgeInsets.only(right: 5),
           child: widget!,
         ),
       );
     }
 
     return Row(
-      children: [
-        SizedBox(
-          child: Row(
-            children: iconList,
-          ),
-        )
-      ],
+      children: iconList,
     );
   }
 }

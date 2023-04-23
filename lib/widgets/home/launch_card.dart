@@ -76,8 +76,8 @@ class LaunchCard extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: size.width * 0.02,
-                vertical: isPortrait ? size.height * 0.005 : size.height * 0.01,
+                horizontal: isPortrait ? 5 : 10,
+                vertical: 10,
               ),
               child: SizedBox(
                 width: 70,
@@ -87,9 +87,6 @@ class LaunchCard extends StatelessWidget {
                 ),
               ),
             ),
-            isPortrait
-                ? SizedBox(width: size.width * 0.030)
-                : const SizedBox.shrink(),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -12,14 +12,11 @@ class IconRowItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    final Orientation orientation = MediaQuery.of(context).orientation;
-
     return Row(
       children: [
         Icon(
           icon,
-          size: orientation == Orientation.portrait ? size.width * 0.05 : 20,
+          size: 20,
         ),
         Text(count),
       ],

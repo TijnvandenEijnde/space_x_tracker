@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
+import 'package:space_x_tracker/widgets/home/card_list_view_responsive_layout.dart';
 
 import 'launch_card.dart';
 
@@ -13,25 +14,74 @@ class CardViewList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Orientation orientation = MediaQuery.of(context).orientation;
-    final bool isPortrait = orientation == Orientation.portrait;
-    final Size size = MediaQuery.of(context).size;
-
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: isPortrait
-            ? 1
-            : size.width > 800
-                ? 2
-                : 1,
-        crossAxisSpacing: 0,
-        childAspectRatio: isPortrait ? 4 : 4,
-        mainAxisSpacing: 0,
+    return CardListViewResponsiveLayout(
+      smallLandscape: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 1,
+          crossAxisSpacing: 0,
+          childAspectRatio: 6,
+          mainAxisSpacing: 0,
+        ),
+        itemCount: launches.length,
+        itemBuilder: (BuildContext context, int index) => Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: LaunchCard(launch: launches[index]),
+        ),
       ),
-      itemCount: launches.length,
-      itemBuilder: (BuildContext context, int index) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: LaunchCard(launch: launches[index]),
+      smallPortrait: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 1,
+          crossAxisSpacing: 0,
+          childAspectRatio: 4,
+          mainAxisSpacing: 0,
+        ),
+        itemCount: launches.length,
+        itemBuilder: (BuildContext context, int index) => Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: LaunchCard(launch: launches[index]),
+        ),
+      ),
+      mediumLandscape: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 0,
+          childAspectRatio: 4,
+          mainAxisSpacing: 0,
+        ),
+        itemCount: launches.length,
+        itemBuilder: (BuildContext context, int index) => Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: LaunchCard(launch: launches[index]),
+        ),
+      ),
+      mediumPortrait: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 0,
+          childAspectRatio: 6,
+          mainAxisSpacing: 0,
+        ),
+        itemCount: launches.length,
+        itemBuilder: (BuildContext context, int index) => Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: FittedBox(
+            fit: BoxFit.fitWidth,
+            child: LaunchCard(launch: launches[index]),
+          ),
+        ),
+      ),
+      large: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 0,
+          childAspectRatio: 8,
+          mainAxisSpacing: 0,
+        ),
+        itemCount: launches.length,
+        itemBuilder: (BuildContext context, int index) => Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: LaunchCard(launch: launches[index]),
+        ),
       ),
     );
   }
