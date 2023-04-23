@@ -8,20 +8,7 @@ class LaunchData {
       'patch': {
         'small': 'https://images2.imgbox.com/94/f2/NN6Ph45r_o.png',
         'large': 'https://images2.imgbox.com/5b/02/QcxHUb5V_o.png'
-      },
-      'reddit': {
-        'campaign': null,
-        'launch': null,
-        'media': null,
-        'recovery': null
-      },
-      'flickr': {'small': [], 'original': []},
-      'presskit': null,
-      'webcast': 'https://www.youtube.com/watch?v=0a_00nJ_Y88',
-      'youtube_id': '0a_00nJ_Y88',
-      'article':
-          'https://www.space.com/2196-spacex-inaugural-falcon-1-rocket-lost-launch.html',
-      'wikipedia': 'https://en.wikipedia.org/wiki/DemoSat'
+      }
     },
     'rocket': '5e9d0d95eda69955f709d1eb',
     'success': false,
@@ -69,9 +56,11 @@ class LaunchData {
     modifiedLaunchData['date_local'] = '2008-03-25T10:30:00+12:00';
     modifiedLaunchData['flight_number'] = 3;
     modifiedLaunchData['name'] = 'FalconX';
-    modifiedLaunchData['links']['patch'] = {
-      'small': null,
-      'large': null,
+    modifiedLaunchData['links'] = {
+      'patch': {
+        'small': null,
+        'large': null,
+      }
     };
 
     return Launch.fromJson(modifiedLaunchData);
@@ -95,9 +84,11 @@ class LaunchData {
 
   static Launch get launchWithoutPatch {
     Map<String, dynamic> modifiedLaunchData = {...launchData};
-    modifiedLaunchData['links']['patch'] = {
-      'small': null,
-      'large': null,
+    modifiedLaunchData['links'] = {
+      'patch': {
+        'small': null,
+        'large': null,
+      }
     };
 
     return Launch.fromJson(modifiedLaunchData);
@@ -110,8 +101,6 @@ class LaunchData {
         small: null,
         large: null,
       ),
-      webcast: null,
-      article: null,
     );
 
     Map<String, dynamic> successLaunchWithoutPatch = successLaunch.toJson();
@@ -120,8 +109,6 @@ class LaunchData {
         small: null,
         large: null,
       ),
-      webcast: null,
-      article: null,
     );
 
     return [
