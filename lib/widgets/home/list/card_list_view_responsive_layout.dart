@@ -6,7 +6,6 @@ class CardListViewResponsiveLayout extends StatelessWidget {
   final Widget mediumLandscape;
   final Widget mediumPortrait;
   final Widget large;
-  // final Widget large;
 
   const CardListViewResponsiveLayout({
     Key? key,
@@ -15,7 +14,6 @@ class CardListViewResponsiveLayout extends StatelessWidget {
     required this.mediumLandscape,
     required this.mediumPortrait,
     required this.large,
-    // required this.large,
   }) : super(key: key);
 
   @override

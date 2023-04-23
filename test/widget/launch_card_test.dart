@@ -6,9 +6,9 @@ import 'package:integration_test/integration_test.dart';
 import 'package:intl/intl.dart';
 import 'package:space_x_tracker/project_theme.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
-import 'package:space_x_tracker/widgets/home/icon_row_item.dart';
-import 'package:space_x_tracker/widgets/home/launch_card.dart';
-import 'package:space_x_tracker/widgets/home/patch.dart';
+import 'package:space_x_tracker/widgets/home/card/icon_row_item.dart';
+import 'package:space_x_tracker/widgets/home/card/patch.dart';
+import 'package:space_x_tracker/widgets/home/card/launch_card.dart';
 
 import 'data/launch_data.dart';
 

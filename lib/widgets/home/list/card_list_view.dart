@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
-import 'package:space_x_tracker/widgets/home/card_list_view_responsive_layout.dart';
+import 'package:space_x_tracker/widgets/home/list/card_list_view_responsive_layout.dart';
 
-import 'launch_card.dart';
+import '../card/launch_card.dart';
 
 class CardViewList extends StatelessWidget {
   final List<Launch> launches;

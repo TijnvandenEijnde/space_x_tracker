@@ -4,10 +4,10 @@ import 'package:space_x_tracker/custom_color_scheme.dart';
 import 'package:space_x_tracker/providers/models/launch.dart';
 import 'package:space_x_tracker/providers/models/launch_details_arguments.dart';
 import 'package:space_x_tracker/screens/rocket_screen.dart';
-import 'package:space_x_tracker/widgets/home/icon_row.dart';
-import 'package:space_x_tracker/widgets/home/patch.dart';
-import 'package:space_x_tracker/widgets/home/status_text.dart';
-import 'package:space_x_tracker/widgets/home/widget_row.dart';
+import 'package:space_x_tracker/widgets/home/card/icon_row.dart';
+import 'package:space_x_tracker/widgets/home/card/patch.dart';
+import 'package:space_x_tracker/widgets/home/card/status_text.dart';
+import 'package:space_x_tracker/widgets/home/card/widget_row.dart';
 
 class LaunchCard extends StatelessWidget {
   final Launch launch;

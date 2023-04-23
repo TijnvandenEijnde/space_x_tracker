@@ -13,7 +13,7 @@ import 'package:space_x_tracker/project_theme.dart';
 import 'package:space_x_tracker/providers/launch_provider.dart';
 import 'package:space_x_tracker/screens/filter_screen.dart';
 import 'package:space_x_tracker/screens/home_screen.dart';
-import 'package:space_x_tracker/widgets/home/launch_card.dart';
+import 'package:space_x_tracker/widgets/home/card/launch_card.dart';
 
 import 'home_view_test.mocks.dart';
 import '../data/launch_data.dart';

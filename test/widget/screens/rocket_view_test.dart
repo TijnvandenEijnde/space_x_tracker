@@ -13,7 +13,7 @@ import 'package:space_x_tracker/providers/models/launch.dart';
 import 'package:space_x_tracker/providers/models/rocket.dart';
 import 'package:space_x_tracker/providers/rocket_provider.dart';
 import 'package:space_x_tracker/screens/rocket_screen.dart';
-import 'package:space_x_tracker/widgets/home/launch_card.dart';
+import 'package:space_x_tracker/widgets/home/card/launch_card.dart';
 import 'package:space_x_tracker/widgets/rocket/rocket_cover_image.dart';
 
 import '../data/launch_data.dart';
