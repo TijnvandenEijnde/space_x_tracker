@@ -22,11 +22,11 @@ class CardListViewResponsiveLayout extends StatelessWidget {
         MediaQuery.of(context).orientation == Orientation.portrait;
 
     return LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxWidth <= 800) {
+      if (constraints.maxWidth <= 725) {
         return isPortrait ? smallPortrait : smallLandscape;
       }
 
-      if (constraints.maxWidth > 800 && constraints.maxWidth < 1300) {
+      if (constraints.maxWidth > 725 && constraints.maxWidth < 1300) {
         return isPortrait ? mediumPortrait : mediumLandscape;
       }
 

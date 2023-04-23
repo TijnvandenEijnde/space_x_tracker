@@ -50,6 +50,7 @@ void main() {
       ),
     );
 
+    await tester.binding.setSurfaceSize(const Size(725, 400));
     await tester.pumpWidget(widgetUnderTest);
   }
 
