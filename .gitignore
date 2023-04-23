@@ -22,6 +22,8 @@ migrate_working_dir/
 #.vscode/
 
 # Flutter/Dart/Pub related
+**.mocks.dart
+**.g.dart
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
@@ -31,6 +33,9 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+
+# macOS
+**/macos/Flutter/GeneratedPluginRegistrant.swift
 
 # Symbolication related
 app.*.symbols
